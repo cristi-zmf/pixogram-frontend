@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: mentool-front
+server:
+  port: 8081
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    preferIpAddress: true
+
+zuul:
+  routes:
+    token:
+      serviceId: persons
+      path: /persons/**
+      stripPrefix: false
+
+
+ribbon:
+  eureka:
+    enabled: true
+
+

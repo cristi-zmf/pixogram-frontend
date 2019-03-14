@@ -1,0 +1,10 @@
+<mat-form-field>
+  <input matInput #dateInput [matDatepicker]="picker" (dateChange)="emitDateChanged($event)" [(ngModel)]="selectedDate" [placeholder]="selectDatePlaceHolder">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+<div class="example-button-row">
+  <button mat-mini-fab color="warn" type="button" (click)="unselect()">Clear</button>
+</div>
+
+
