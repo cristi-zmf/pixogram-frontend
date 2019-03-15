@@ -1,7 +1,7 @@
 package com.cristi.mentool.mentoolfront.exposition.authentication;
 
 import com.cristi.mentool.mentoolfront.domain.Role;
-import com.cristi.mentool.mentoolfront.domain.security.Authority;
+import com.cristi.mentool.mentoolfront.domain.security.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -18,9 +18,9 @@ public class AuthentifiedUserDto {
     public AuthentifiedUserDto(String token) {
         this.token = token;
     }
-    public AuthentifiedUserDto(Authority authority, String token) {
+    public AuthentifiedUserDto(User user, String token) {
         this.token = token;
-        this.username = authority.getUsername();
-        this.role = authority.getRole();
+        this.username = user.getUsername();
+        this.role = user.getRole();
     }
 }

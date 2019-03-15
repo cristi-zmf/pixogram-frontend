@@ -5,14 +5,8 @@
       <a class="navbar-brand" routerLink="user">Mentool</a>
       <ul class="navbar-nav mr-auto" routerLinkActive="active">
         <li class="nav-item"><a class="nav-link" [routerLink]="getUrlForHome()">Home</a></li>
-        <li class="nav-item" *ngIf="isLoggedIn && hasPermission(adminRole)"><a class="nav-link" routerLink="/authorities">Authorities</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/training-search">Training Search</a></li>
-        <li class="nav-item" *ngIf="isLoggedIn && hasPermission(userRole)"><a class="nav-link" routerLink="/user-profile">User Profile</a></li>
-        <li class="nav-item" *ngIf="!isLoggedIn"><a class="nav-link" routerLink="/user-registration">User Registration</a></li>
-        <li class="nav-item" *ngIf="!isLoggedIn"><a class="nav-link" routerLink="/mentor/create">Mentor Registration</a></li>
-        <li class="nav-item" *ngIf="isLoggedIn && hasPermission(mentorRole)"><a class="nav-link" [routerLink]=getUrlForMentorProfile()>Mentor Profile</a></li>
-        <li class="nav-item" *ngIf="isLoggedIn && hasPermission(mentorRole)"><a class="nav-link" routerLink="/mentor/trainings">Mentor Trainings</a></li>
-        <li class="nav-item" *ngIf="isLoggedIn && hasPermission(adminRole)"><a class="nav-link" routerLink="/admin">Admin</a></li>
+        <li class="nav-item" *ngIf="!isLoggedIn"><a class="nav-link" routerLink="/user/create">User Registration</a></li>
+        <li class="nav-item" *ngIf="isLoggedIn && hasPermission(userRole)"><a class="nav-link" [routerLink]=getUrlForMentorProfile()>User Profile</a></li>
         <li class="nav-item" *ngIf="isLoggedIn"><a class="nav-link" (click)="logout()">Log out</a></li>
       </ul>
     </div>

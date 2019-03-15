@@ -45,7 +45,7 @@ export class AppComponent {
   }
 
   getUrlForMentorProfile(): string {
-    return this.currentUser ? `/mentor/view/${this.currentUser.username}` : this.loginUrl;
+    return this.currentUser ? `/user/view/${this.currentUser.username}` : this.loginUrl;
   }
 
   logout() {

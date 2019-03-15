@@ -1,7 +1,7 @@
-package com.cristi.mentool.mentoolfront.exposition.registration.user;
+package com.cristi.mentool.mentoolfront.exposition.user;
 
 import com.cristi.mentool.mentoolfront.domain.Role;
-import com.cristi.mentool.mentoolfront.domain.security.AddNewAuthority;
+import com.cristi.mentool.mentoolfront.domain.security.AddNewUser;
 import com.cristi.mentool.mentoolfront.exposition.MentoolRequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -16,24 +16,24 @@ import javax.validation.Valid;
 
 @MentoolRequestMapping
 public class UserRegistrationResource {
-    private final AddNewAuthority addNewAuthority;
+    private final AddNewUser addNewUser;
     private final RestTemplate restTemplate;
 
     private final static String PERSONS_SERVICE = "http://persons";
 
 
     public UserRegistrationResource(
-            AddNewAuthority addNewAuthority,
+            AddNewUser addNewUser,
             @Autowired @LoadBalanced RestTemplate restTemplate
     ) {
-        this.addNewAuthority = addNewAuthority;
+        this.addNewUser = addNewUser;
         this.restTemplate = restTemplate;
     }
 
     @PostMapping(value = "/users")
     public String registerUser(@Valid @RequestBody UserCreateCommand registerCommand) throws AuthenticationException {
         registerCommand.role = Role.USER;
-        addNewAuthority.addAuthorityFor(registerCommand);
+        addNewUser.addUserFor(registerCommand);
         return restTemplate.exchange(
                 PERSONS_SERVICE + "/persons/users", HttpMethod.POST,
                 new HttpEntity<>(registerCommand), String.class

@@ -1,32 +1,32 @@
 package com.cristi.mentool.mentoolfront.domain.security;
 
 import com.cristi.mentool.mentoolfront.domain.EmailAddress;
-import com.cristi.mentool.mentoolfront.exposition.AuthorityCreateCommand;
+import com.cristi.mentool.mentoolfront.exposition.UserCreateCommand;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import static java.lang.String.format;
 
 @Service
-public class AddNewAuthority {
-    private final Authorities authorities;
+public class AddNewUser {
+    private final Users users;
     private final BCryptPasswordEncoder bcryptEncoder;
 
-    public AddNewAuthority(Authorities authorities, BCryptPasswordEncoder bcryptEncoder) {
-        this.authorities = authorities;
+    public AddNewUser(Users users, BCryptPasswordEncoder bcryptEncoder) {
+        this.users = users;
         this.bcryptEncoder = bcryptEncoder;
     }
 
-    public Authority addAuthorityFor(AuthorityCreateCommand command) {
+    public User addUserFor(UserCreateCommand command) {
         EmailAddress emailAddress = new EmailAddress(command.username);
-        if (authorities.exists(emailAddress)) {
+        if (users.exists(emailAddress)) {
             throw new IllegalStateException(format("%s is already registered", emailAddress));
         }
         String passwordHash = bcryptEncoder.encode(command.password);
-        Authority newAuthority = new Authority(
-                emailAddress, command.role, passwordHash
+        User newUser = new User(
+                emailAddress, command.role, passwordHash,
+                command.firstName, command.lastName
         );
-
-        return authorities.add(newAuthority);
+        return users.add(newUser);
     }
 }

@@ -1,7 +1,7 @@
 package com.cristi.mentool.mentoolfront.exposition.authentication;
 
 
-import com.cristi.mentool.mentoolfront.domain.security.Authority;
+import com.cristi.mentool.mentoolfront.domain.security.User;
 import com.cristi.mentool.mentoolfront.exposition.MentoolRequestMapping;
 import com.cristi.mentool.mentoolfront.infra.security.TokenProvider;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,7 +11,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 @MentoolRequestMapping
 public class AuthenticationResource {
@@ -32,8 +31,8 @@ public class AuthenticationResource {
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        Authority loggedAuthority = (Authority) authentication.getPrincipal();
+        User loggedUser = (User) authentication.getPrincipal();
         final String token = jwtTokenUtil.generateToken(authentication);
-        return new AuthentifiedUserDto(loggedAuthority, token);
+        return new AuthentifiedUserDto(loggedUser, token);
     }
 }

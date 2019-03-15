@@ -1,8 +1,8 @@
 package com.cristi.mentool.mentoolfront.infra.persistence;
 
 import com.cristi.mentool.mentoolfront.domain.EmailAddress;
-import com.cristi.mentool.mentoolfront.domain.security.Authorities;
-import com.cristi.mentool.mentoolfront.domain.security.Authority;
+import com.cristi.mentool.mentoolfront.domain.security.Users;
+import com.cristi.mentool.mentoolfront.domain.security.User;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,11 +14,11 @@ import java.util.Set;
 
 @Repository(value = "userService")
 @Primary
-public class SdjAuthorities implements Authorities {
-    private final AuthoritiesSdj sdj;
+public class SdjUsers implements Users {
+    private final UserSdj sdj;
 
 
-    public SdjAuthorities(AuthoritiesSdj sdj) {
+    public SdjUsers(UserSdj sdj) {
         this.sdj = sdj;
     }
 
@@ -28,12 +28,12 @@ public class SdjAuthorities implements Authorities {
     }
 
     @Override
-    public Authority add(Authority authority) {
-        return sdj.saveAndFlush(authority);
+    public User add(User user) {
+        return sdj.saveAndFlush(user);
     }
 
     @Override
-    public Set<Authority> findAll() {
+    public Set<User> findAll() {
         return new HashSet<>(sdj.findAll());
     }
 
@@ -43,7 +43,7 @@ public class SdjAuthorities implements Authorities {
     }
 
     @Override
-    public Authority findById(EmailAddress address) {
+    public User findById(EmailAddress address) {
         return sdj.findById(address).orElseThrow(NoSuchElementException::new);
     }
 }

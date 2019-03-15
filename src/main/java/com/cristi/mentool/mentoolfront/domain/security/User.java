@@ -3,8 +3,6 @@ package com.cristi.mentool.mentoolfront.domain.security;
 import com.cristi.mentool.mentoolfront.domain.BaseEntity;
 import com.cristi.mentool.mentoolfront.domain.EmailAddress;
 import com.cristi.mentool.mentoolfront.domain.Role;
-import com.cristi.mentool.mentoolfront.domain.UniqueId;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,11 +18,19 @@ import static java.util.Collections.singleton;
 @Entity(name = "AUTHORITY")
 @Access(AccessType.FIELD)
 @AttributeOverride(name = "id", column = @Column(name = "EMAIL_ADDRESS"))
-public class Authority extends BaseEntity<Authority, EmailAddress> implements UserDetails {
+public class User extends BaseEntity<User, EmailAddress> implements UserDetails {
     @NotNull
     @Column(name = "ROLE")
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @NotBlank
+    @Column(name = "FIRST_NAME")
+    private String firstName;
+
+    @NotBlank
+    @Column(name = "LAST_NAME")
+    private String lastName;
 
     @NotBlank
     @Column(name = "PASSWORD_HASH")
@@ -43,11 +49,14 @@ public class Authority extends BaseEntity<Authority, EmailAddress> implements Us
     private boolean enabled;
 
 
-    public Authority(
-            @NotNull EmailAddress username, @NotNull Role role, @NotBlank String passwordHash
+    public User(
+            @NotNull EmailAddress username, @NotNull Role role, @NotBlank String passwordHash,
+            String firstName, String lastName
     ) {
-        super(Authority.class, username);
+        super(User.class, username);
         this.role = role;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.passwordHash = passwordHash;
         this.accountNonLocked = true;
         this.accountNonExpired = true;
@@ -57,8 +66,8 @@ public class Authority extends BaseEntity<Authority, EmailAddress> implements Us
     }
 
     /*Used by jpa*/
-    public Authority() {
-        super(Authority.class, null);
+    public User() {
+        super(User.class, null);
     }
 
     @Override
@@ -106,5 +115,13 @@ public class Authority extends BaseEntity<Authority, EmailAddress> implements Us
 
     public void unlockUser() {
         accountNonLocked = true;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 }

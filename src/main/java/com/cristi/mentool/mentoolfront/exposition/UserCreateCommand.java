@@ -12,10 +12,16 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthorityCreateCommand {
+public class UserCreateCommand {
     @JsonProperty
     @NotEmpty
     public String username;
+    @JsonProperty
+    @NotEmpty
+    public String firstName;
+    @JsonProperty
+    @NotEmpty
+    public String lastName;
     @JsonProperty
     public Role role;
     @JsonProperty
