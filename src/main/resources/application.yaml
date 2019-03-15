@@ -1,6 +1,6 @@
 spring:
   application:
-    name: mentool-front
+    name: pixogram-front
 server:
   port: 8081
 

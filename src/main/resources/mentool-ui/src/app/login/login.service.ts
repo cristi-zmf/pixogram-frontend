@@ -5,7 +5,6 @@ import {LoginRequest} from './login-request';
 import {CurrentUserService} from './current-user.service';
 import {Router} from '@angular/router';
 import {Observable, Subject} from "rxjs";
-import {Role} from "../authorities/role.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -29,14 +28,7 @@ export class LoginService {
           console.log("luam userul: " + authentifiedUser);
           localStorage.setItem(CurrentUserService.CURRENT_USER, JSON.stringify(authentifiedUser));
           this.userSubject.next(authentifiedUser);
-          const role = authentifiedUser.role;
-          if (role === Role.USER) {
-            this.router.navigate(['user-profile']);
-          } else if(role === Role.MENTOR) {
-            this.router.navigate([`mentor/view/${authentifiedUser.username}`]);
-          } else {
-            this.router.navigate([`admin`]);
-          }
+          this.router.navigate([`user/view/${authentifiedUser.username}`]);
         },
         (err => console.log(err))
       );

@@ -14,7 +14,7 @@ export class UserForm extends FormGroup{
 
   public setFormFromDto(userData: any) {
     this.patchValue({
-      username: userData.id,
+      username: userData.email,
       firstName: userData.firstName,
       lastName: userData.lastName,
     })

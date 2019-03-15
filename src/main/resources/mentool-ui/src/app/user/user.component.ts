@@ -30,7 +30,6 @@ export class UserComponent implements OnInit {
       routeParams => {
         this.userForm = new UserForm();
         this.mode = routeParams['mode'];
-        console.log(routeParams);
         this.userAddressFromUrl = routeParams['id'];
         this.handleFormDataAccordingToComponentMode();
       }
@@ -78,10 +77,11 @@ export class UserComponent implements OnInit {
   }
 
   enterEditMode() {
-    this.router.navigate([`mentor/edit/${this.userForm.get('username').value}`]);
+  console.log(this.userForm.getUsername());
+    this.router.navigate([`user/edit/${this.userForm.getUsername()}`]);
   }
 
   cancelEdit() {
-    this.router.navigate([`mentor/view/${this.userAddressBeforeEdit}`]);
+    this.router.navigate([`user/view/${this.userAddressBeforeEdit}`]);
   }
 }

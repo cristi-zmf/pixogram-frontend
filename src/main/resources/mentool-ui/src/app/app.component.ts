@@ -11,11 +11,8 @@ import {AuthentifiedUser} from "./login/authentified-user";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private title = 'mentool-ui';
   private isLoggedIn : boolean;
   private userRole: string = Role.USER;
-  private mentorRole: string = Role.MENTOR;
-  private adminRole: string = Role.ADMIN;
   private loginUrl: string = '/login';
   private currentUser: AuthentifiedUser;
 
@@ -44,7 +41,7 @@ export class AppComponent {
     return !!this.permissionService.getPermission(permission);
   }
 
-  getUrlForMentorProfile(): string {
+  getUrlForUserProfile(): string {
     return this.currentUser ? `/user/view/${this.currentUser.username}` : this.loginUrl;
   }
 
@@ -56,17 +53,7 @@ export class AppComponent {
 
   getUrlForHome(): string {
     if (this.currentUser) {
-      switch (this.currentUser.role) {
-        case Role.MENTOR: {
-          return this.getUrlForMentorProfile();
-        }
-        case Role.USER: {
-          return '/user-profile'
-        }
-        case Role.ADMIN: {
-          return '/admin';
-        }
-      }
+          return this.getUrlForUserProfile();
     } else {
       return this.loginUrl;
     }

@@ -8,12 +8,8 @@ import {Role} from "./authorities/role.enum";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
-  { path: 'user/view', component: UserComponent, data: {permissions: {only: Role.USER}}, canActivate: [NgxPermissionsGuard]},
-  { path: 'user/edit', component: UserComponent, data: {permissions: {only: Role.USER}}, canActivate: [NgxPermissionsGuard]},
   { path: 'user/create', component: UserComponent, data: {permissions: {except: Role.LOGGED}}, canActivate: [NgxPermissionsGuard]},
-  { path: 'user/:mode', component: UserComponent},
-  { path: 'user/:mode/:id', component: UserComponent},
-  { path: 'user/:mode/:id', component: UserComponent},
+  { path: 'user/:mode/:id', component: UserComponent, data: {permissions: {only: Role.USER}}, canActivate: [NgxPermissionsGuard]},
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
 
 ];

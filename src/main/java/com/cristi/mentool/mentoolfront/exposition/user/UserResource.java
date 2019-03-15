@@ -40,6 +40,11 @@ public class UserResource {
         return ResponseEntity.ok(true);
     }
 
+    @GetMapping("/users/{accountAddress}")
+    public UserConsultDto getUser(@PathVariable EmailAddress accountAddress) {
+        return new UserConsultDto(users.findById(accountAddress));
+    }
+
     @PostMapping("/users/{accountAddress}/unlock")
     @RolesAllowed({RoleConstants.ADMIN})
     public ResponseEntity<Boolean> unlockUserAccount(@PathVariable EmailAddress accountAddress) {
