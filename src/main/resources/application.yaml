@@ -16,8 +16,8 @@ eureka:
 zuul:
   routes:
     token:
-      serviceId: persons
-      path: /persons/**
+      serviceId: images
+      path: /images/**
       stripPrefix: false
 
 
