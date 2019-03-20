@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {TrainingSearchRequest} from "./training-search-request";
 import {AppSettings} from "../app-settings";
-const MENTORS_API = `${AppSettings.PERSONS_API_PREFIX}/mentors`;
+const MENTORS_API = `${AppSettings.IMAGES_API_PREFIX}/mentors`;
 
 
 
@@ -23,16 +23,16 @@ export class TrainingService {
   }
 
   bookTraining(bookingCommand: any): Observable<any> {
-    return this.httpClient.put(`${AppSettings.PERSONS_API_PREFIX}/calendar/book`, bookingCommand);
+    return this.httpClient.put(`${AppSettings.IMAGES_API_PREFIX}/calendar/book`, bookingCommand);
   }
 
   cancelBookingTraining(bookingCommand: any): Observable<any> {
-    return this.httpClient.put(`${AppSettings.PERSONS_API_PREFIX}/calendar/cancel-booking`, bookingCommand);
+    return this.httpClient.put(`${AppSettings.IMAGES_API_PREFIX}/calendar/cancel-booking`, bookingCommand);
   }
 
   getTrainingsBookedByUser(userEmail: string): Observable<any> {
     userEmail = this.escapeEmailSpecialCharacter(userEmail);
-    return this.httpClient.get(`${AppSettings.PERSONS_API_PREFIX}/calendar/${userEmail}/bookings`);
+    return this.httpClient.get(`${AppSettings.IMAGES_API_PREFIX}/calendar/${userEmail}/bookings`);
   }
 
   getMentorTrainings(email: string): Observable<any> {

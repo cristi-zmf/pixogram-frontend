@@ -10,7 +10,7 @@ import {
   MatCardModule,
   MatDatepickerModule,
   MatDialogModule,
-  MatFormFieldModule,
+  MatFormFieldModule, MatIconModule,
   MatInputModule,
   MatMenuModule,
   MatNativeDateModule,
@@ -42,6 +42,8 @@ import {MentorTrainingsComponent} from './user/mentor-trainings/mentor-trainings
 import {MatDatetimepickerModule} from "@mat-datetimepicker/core";
 import {MatMomentDatetimeModule} from "@mat-datetimepicker/moment";
 import {MomentDateModule} from "@angular/material-moment-adapter";
+import { UserGalleryImageComponent } from './user-gallery-image/user-gallery-image.component';
+import {MyDialogComponent} from "./shared/my-dialog/my-dialog.component";
 
 @NgModule({
   declarations: [
@@ -56,9 +58,11 @@ import {MomentDateModule} from "@angular/material-moment-adapter";
     RequiredComponent,
     AdminComponent,
     DialogComponent,
+    MyDialogComponent,
     TrainingDetailsComponent,
     TrainingsListComponent,
-    MentorTrainingsComponent
+    MentorTrainingsComponent,
+    UserGalleryImageComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +85,7 @@ import {MomentDateModule} from "@angular/material-moment-adapter";
     MatNativeDateModule,
     MatToolbarModule,
     MatDialogModule,
+    MatIconModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     MatMenuModule,
@@ -93,7 +98,7 @@ import {MomentDateModule} from "@angular/material-moment-adapter";
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ToastrHttpInterceptorService, multi: true}
   ],
-  entryComponents: [DialogComponent],
+  entryComponents: [DialogComponent, MyDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {
