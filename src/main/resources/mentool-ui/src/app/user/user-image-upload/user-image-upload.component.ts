@@ -29,8 +29,6 @@ export class UserImageUploadComponent implements OnInit {
     const files: { [key: string]: File } = this.file.nativeElement.files;
     for (let key in files) {
       if (!isNaN(parseInt(key))) {
-        console.log("ajungem aici");
-        console.log(files[key]);
         this.files.add(files[key]);
       }
     }
@@ -50,23 +48,31 @@ export class UserImageUploadComponent implements OnInit {
     // start the upload and save the progress map
     let username: string = this.currentUserService.getCurrentUser().username;
     let uploadCommand: FormData = new FormData();
-    console.log(this.files.values().next().value);
+    let uploadCommands: Array<FormData> = new Array<FormData>();
     uploadCommand.append("username", username);
-    uploadCommand.append("multipartFile", this.files.values().next().value);
+    this.files.forEach((file) => {
+      let uploadCommand: FormData = new FormData();
+      uploadCommand.append("username", username);
+      uploadCommand.append("multipartFile", file);
+      uploadCommand.append("filename", file.name);
+      uploadCommands.push(uploadCommand);
+    });
 
-    this.progress = this.uploadService.upload(uploadCommand);
+
+
+    this.progress = this.uploadService.upload(uploadCommands);
     console.log(this.progress);
-    // for (const key in this.progress) {
-    //   this.progress[key].progress.subscribe(val => console.log(val));
-    // }
+    for (const key in this.progress) {
+      this.progress[key].progress.subscribe(val => console.log(val));
+    }
 
     this.progress.subscribe(val => console.log(val));
 
     // convert the progress map into an array
-    // let allProgressObservables = [];
-    // for (let key in this.progress) {
-    //   allProgressObservables.push(this.progress[key].progress);
-    // }
+    let allProgressObservables = [];
+    for (let key in this.progress) {
+      allProgressObservables.push(this.progress[key].progress);
+    }
 
     // Adjust the state variables
 

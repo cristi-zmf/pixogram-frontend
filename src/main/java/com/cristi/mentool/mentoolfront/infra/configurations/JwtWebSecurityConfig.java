@@ -29,7 +29,7 @@ public class JwtWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     private static final String[] ALLOWED_ENDPOINTS = {"/",
-            "/persons/mentors/search", "/persons/skills",
+            "/images/thumbnails/*", "/images/full-images/*",
             "/api/token/generate-token",  "/api/token/**","/login/**", "/**/login/**", "/api/users", "/api/mentors",
             "/v2/api-docs", "/swagger-resources/configuration/ui", "/configuration/ui",
             "/swagger-resources", "/swagger-resources/configuration/security", "/configuration/security",
