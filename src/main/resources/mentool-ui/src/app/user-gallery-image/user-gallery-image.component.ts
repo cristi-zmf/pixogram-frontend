@@ -16,7 +16,7 @@ export class UserGalleryImageComponent implements OnInit {
   title = 'app';
   user: AuthentifiedUser;
   userImageIds: Array<String>;
-  processedImages: [{id: string, title: string, img: string, fullImg: string}] = [];
+  processedImages: {id: string, title: string, img: string, fullImg: string}[] = [];
   baseUrl: string = window.location.origin;
 
   ngOnInit(): void {

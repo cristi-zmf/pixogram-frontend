@@ -11,10 +11,10 @@ import {
   MatDatepickerModule,
   MatDialogModule,
   MatFormFieldModule, MatIconModule,
-  MatInputModule,
+  MatInputModule, MatListModule,
   MatMenuModule,
   MatNativeDateModule,
-  MatPaginatorModule,
+  MatPaginatorModule, MatProgressBarModule,
   MatRippleModule,
   MatSelectModule,
   MatTableModule,
@@ -44,6 +44,7 @@ import {MatMomentDatetimeModule} from "@mat-datetimepicker/moment";
 import {MomentDateModule} from "@angular/material-moment-adapter";
 import { UserGalleryImageComponent } from './user-gallery-image/user-gallery-image.component';
 import {MyDialogComponent} from "./shared/my-dialog/my-dialog.component";
+import { UserImageUploadComponent } from './user/user-image-upload/user-image-upload.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import {MyDialogComponent} from "./shared/my-dialog/my-dialog.component";
     TrainingDetailsComponent,
     TrainingsListComponent,
     MentorTrainingsComponent,
-    UserGalleryImageComponent
+    UserGalleryImageComponent,
+    UserImageUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -86,6 +88,8 @@ import {MyDialogComponent} from "./shared/my-dialog/my-dialog.component";
     MatToolbarModule,
     MatDialogModule,
     MatIconModule,
+    MatProgressBarModule,
+    MatListModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     MatMenuModule,

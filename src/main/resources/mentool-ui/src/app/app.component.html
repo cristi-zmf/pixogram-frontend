@@ -8,6 +8,8 @@
         <li class="nav-item" *ngIf="!isLoggedIn"><a class="nav-link" routerLink="/user/create">User Registration</a></li>
         <li class="nav-item" *ngIf="isLoggedIn && hasPermission(userRole)"><a class="nav-link" [routerLink]=getUrlForUserProfile()>User Profile</a></li>
         <li class="nav-item" *ngIf="isLoggedIn && hasPermission(userRole)"><a class="nav-link" routerLink="/user/image">My Gallery</a></li>
+        <li class="nav-item" *ngIf="isLoggedIn && hasPermission(userRole)"><a class="nav-link" routerLink="/user/upload">Upload image</a></li>
+
 
         <li class="nav-item" *ngIf="isLoggedIn"><a class="nav-link" (click)="logout()">Log out</a></li>
       </ul>
