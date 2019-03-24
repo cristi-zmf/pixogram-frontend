@@ -3,7 +3,6 @@ import {MyDialogComponent} from "../shared/my-dialog/my-dialog.component";
 import {MatDialog} from "@angular/material";
 import {ImageService} from "./image.service";
 import {CurrentUserService} from "../login/current-user.service";
-import {User} from "../user/user";
 import {AuthentifiedUser} from "../login/authentified-user";
 import {AppSettings} from "../app-settings";
 
@@ -15,18 +14,16 @@ import {AppSettings} from "../app-settings";
 export class UserGalleryImageComponent implements OnInit {
   title = 'app';
   user: AuthentifiedUser;
-  userImageIds: Array<String>;
+  userImageIds: Array<{id: string, title: string}>;
   processedImages: {id: string, title: string, img: string, fullImg: string}[] = [];
   baseUrl: string = window.location.origin;
 
   ngOnInit(): void {
     this.user = this.currentUserService.getCurrentUser();
     this.imageService.getImagesIds(this.user.username).subscribe(
-      (imageIds: Array<String>) => {
+      (imageIds: Array<{id: string, title: string}>) => {
         this.userImageIds = imageIds;
-        console.log(this.userImageIds);
         this.preparePicturesUrls();
-        console.log(this.processedImages);
       }
   );
 
@@ -34,13 +31,14 @@ export class UserGalleryImageComponent implements OnInit {
 
   private preparePicturesUrls() {
     let counter: number = 0;
-    for(let imageId of this.userImageIds) {
-      console.log(imageId);
-      let processedImage: {id: string, title: string, img: string, fullImg: string} = {};
-      processedImage.img = `${this.baseUrl}/${AppSettings.IMAGES_API_PREFIX}/thumbnails/${imageId}`;
-      processedImage.title = `Image no. ${counter}`;
-      processedImage.id = String(counter);
-      processedImage.fullImg = `${this.baseUrl}/${AppSettings.IMAGES_API_PREFIX}/full-images/${imageId}`;
+    for(let imageIdTitle of this.userImageIds) {
+      console.log(imageIdTitle);
+      let processedImage: {id: string, title: string, img: string, fullImg: string} =  {
+        id: String(counter),
+        title: imageIdTitle.title,
+        img: `${this.baseUrl}/${AppSettings.IMAGES_API_PREFIX}/thumbnails/${imageIdTitle.id}`,
+        fullImg: `${this.baseUrl}/${AppSettings.IMAGES_API_PREFIX}/full-images/${imageIdTitle.id}`
+      };
       console.log(processedImage);
       this.processedImages.push(processedImage);
     }

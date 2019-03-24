@@ -11,6 +11,6 @@ export class ImageService {
   constructor(private httpClient: HttpClient) {}
   getImagesIds(userAddress: string): Observable<any> {
     const userAddressParsed = userAddress.replace('@', '%40');
-    return this.httpClient.get(`${AppSettings.IMAGES_API_PREFIX}/${userAddressParsed}/images/ids`);
+    return this.httpClient.get(`${AppSettings.IMAGES_API_PREFIX}/${userAddressParsed}/images/id-titles`);
   }
 }

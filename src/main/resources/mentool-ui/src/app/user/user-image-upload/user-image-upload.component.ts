@@ -47,13 +47,18 @@ export class UserImageUploadComponent implements OnInit {
 
     // start the upload and save the progress map
     let username: string = this.currentUserService.getCurrentUser().username;
-    let uploadCommand: FormData = new FormData();
     let uploadCommands: Array<FormData> = new Array<FormData>();
-    uploadCommand.append("username", username);
     this.files.forEach((file) => {
       let uploadCommand: FormData = new FormData();
-      uploadCommand.append("username", username);
-      uploadCommand.append("multipartFile", file);
+      let imageDetails: any = {};
+      imageDetails.username = username;
+      imageDetails.imageTitle = 'Image title';
+      imageDetails.imageDescription = 'Image description';
+      uploadCommand.append('multipartFile', file);
+      const imageDetailsJson = JSON.stringify(imageDetails);
+      console.log(imageDetails);
+      console.log(imageDetailsJson);
+      uploadCommand.append("imageDetails", imageDetailsJson);
       uploadCommand.append("filename", file.name);
       uploadCommands.push(uploadCommand);
     });
