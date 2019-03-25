@@ -39,7 +39,6 @@ export class UserGalleryImageComponent implements OnInit {
         img: `${this.baseUrl}/${AppSettings.IMAGES_API_PREFIX}/thumbnails/${imageIdTitle.id}`,
         fullImg: `${this.baseUrl}/${AppSettings.IMAGES_API_PREFIX}/full-images/${imageIdTitle.id}`
       };
-      console.log(processedImage);
       this.processedImages.push(processedImage);
     }
 

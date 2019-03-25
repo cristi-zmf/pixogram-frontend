@@ -12,7 +12,7 @@ export class UserImageUploadComponent implements OnInit {
 
   @ViewChild('file') file;
 
-  public files: Set<File> = new Set();
+  public fileUploadCommands: Set<{file: File, title: string, description: string}> = new Set();
 
   constructor(public uploadService: UploadFileService, private currentUserService: CurrentUserService) {}
 
@@ -29,7 +29,8 @@ export class UserImageUploadComponent implements OnInit {
     const files: { [key: string]: File } = this.file.nativeElement.files;
     for (let key in files) {
       if (!isNaN(parseInt(key))) {
-        this.files.add(files[key]);
+        let fileUpload = this.initializeFileUploadCommand(files, key);
+        this.fileUploadCommands.add(fileUpload);
       }
     }
   }
@@ -48,18 +49,9 @@ export class UserImageUploadComponent implements OnInit {
     // start the upload and save the progress map
     let username: string = this.currentUserService.getCurrentUser().username;
     let uploadCommands: Array<FormData> = new Array<FormData>();
-    this.files.forEach((file) => {
-      let uploadCommand: FormData = new FormData();
-      let imageDetails: any = {};
-      imageDetails.username = username;
-      imageDetails.imageTitle = 'Image title';
-      imageDetails.imageDescription = 'Image description';
-      uploadCommand.append('multipartFile', file);
-      const imageDetailsJson = JSON.stringify(imageDetails);
-      console.log(imageDetails);
-      console.log(imageDetailsJson);
-      uploadCommand.append("imageDetails", imageDetailsJson);
-      uploadCommand.append("filename", file.name);
+    this.fileUploadCommands.forEach((fileUploadCommand) => {
+      const imageDetailsJson = this.prepareImageDetails(username, fileUploadCommand);
+      let uploadCommand = this.prepareUploadCommand(fileUploadCommand, imageDetailsJson);
       uploadCommands.push(uploadCommand);
     });
 
@@ -101,5 +93,31 @@ export class UserImageUploadComponent implements OnInit {
       // ... and the component is no longer uploading
       this.uploading = false;
     });
+  }
+
+  private prepareImageDetails(username: string, fileUploadCommand) {
+    let imageDetails: any = {};
+    imageDetails.username = username;
+    imageDetails.imageTitle = fileUploadCommand.title;
+    imageDetails.imageDescription = fileUploadCommand.description;
+    const imageDetailsJson = JSON.stringify(imageDetails);
+    return imageDetailsJson;
+  }
+
+  private prepareUploadCommand(fileUploadCommand, imageDetailsJson) {
+    let uploadCommand: FormData = new FormData();
+    uploadCommand.append('multipartFile', fileUploadCommand.file);
+    uploadCommand.append("imageDetails", imageDetailsJson);
+    uploadCommand.append("filename", fileUploadCommand.file.name);
+    return uploadCommand;
+  }
+
+  private initializeFileUploadCommand(files: { [p: string]: File }, key) {
+    let fileUpload: { file: File, title: string, description: string } = {
+      file: files[key],
+      title: '',
+      description: ''
+    };
+    return fileUpload;
   }
 }

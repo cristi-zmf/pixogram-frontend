@@ -10,11 +10,11 @@
   <!-- This is the content of the dialog, containing a list of the files to upload -->
   <mat-card-content fxFlex>
     <mat-list>
-      <mat-list-item *ngFor="let file of files">
-        <h4 mat-line>{{file.name}}</h4>
-        <input *ngIf="!progress" type="text" placeholder="image title">
-        <input *ngIf="!progress" type="text" placeholder="image description">
-        <mat-progress-bar *ngIf="progress" mode="determinate" [value]="progress[file.name].progress | async"></mat-progress-bar>
+      <mat-list-item *ngFor="let fileUploadCommand of fileUploadCommands">
+        <h4 mat-line>{{fileUploadCommand.file.name}}</h4>
+        <input *ngIf="!progress" type="text" placeholder="image title" [(ngModel)]="fileUploadCommand.title">
+        <input *ngIf="!progress" type="text" placeholder="image description" [(ngModel)]="fileUploadCommand.description">
+        <mat-progress-bar *ngIf="progress" mode="determinate" [value]="progress[fileUploadCommand.file.name].progress | async"></mat-progress-bar>
       </mat-list-item>
     </mat-list>
   </mat-card-content>
