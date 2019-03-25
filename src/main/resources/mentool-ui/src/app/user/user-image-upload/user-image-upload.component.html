@@ -12,10 +12,19 @@
     <mat-list>
       <mat-list-item *ngFor="let fileUploadCommand of fileUploadCommands">
         <h4 mat-line>{{fileUploadCommand.file.name}}</h4>
-        <input *ngIf="!progress" type="text" placeholder="image title" [(ngModel)]="fileUploadCommand.title">
-        <input *ngIf="!progress" type="text" placeholder="image description" [(ngModel)]="fileUploadCommand.description">
+        <mat-form-field *ngIf="!progress">
+          <mat-label>Image title</mat-label>
+          <input matInput  type="text"
+                 placeholder="Image title max 30 char" [(ngModel)]="fileUploadCommand.title" maxLength="30">
+        </mat-form-field>
+        <mat-form-field *ngIf="!progress">
+          <mat-label>Image description</mat-label>
+          <input matInput type="text" placeholder="Image description"
+                 [(ngModel)]="fileUploadCommand.description" maxlength="500">
+        </mat-form-field>
         <mat-progress-bar *ngIf="progress" mode="determinate" [value]="progress[fileUploadCommand.file.name].progress | async"></mat-progress-bar>
       </mat-list-item>
+
     </mat-list>
   </mat-card-content>
 
