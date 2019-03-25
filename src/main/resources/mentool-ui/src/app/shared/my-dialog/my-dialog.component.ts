@@ -7,7 +7,7 @@ import {MatDialogRef} from '@angular/material';
   styleUrls: ['./my-dialog.component.css']
 })
 export class MyDialogComponent implements OnInit {
-  constructor(public thisDialogRef: MatDialogRef<MyDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: string) 
+  constructor(public thisDialogRef: MatDialogRef<MyDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any)
   { 
     console.log("inside dialog "+data);
   }

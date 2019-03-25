@@ -6,6 +6,13 @@ import {CurrentUserService} from "../login/current-user.service";
 import {AuthentifiedUser} from "../login/authentified-user";
 import {AppSettings} from "../app-settings";
 
+interface ImageIdentificationInfo {
+  id: string,
+  title: string,
+  img: string,
+  fullImg: string
+}
+
 @Component({
   selector: 'app-user-gallery-image',
   templateUrl: './user-gallery-image.component.html',
@@ -15,7 +22,7 @@ export class UserGalleryImageComponent implements OnInit {
   title = 'app';
   user: AuthentifiedUser;
   userImageIds: Array<{id: string, title: string}>;
-  processedImages: {id: string, title: string, img: string, fullImg: string}[] = [];
+  processedImages: ImageIdentificationInfo[] = [];
   baseUrl: string = window.location.origin;
 
   ngOnInit(): void {
@@ -33,8 +40,8 @@ export class UserGalleryImageComponent implements OnInit {
     let counter: number = 0;
     for(let imageIdTitle of this.userImageIds) {
       console.log(imageIdTitle);
-      let processedImage: {id: string, title: string, img: string, fullImg: string} =  {
-        id: String(counter),
+      let processedImage: ImageIdentificationInfo =  {
+        id: imageIdTitle.id,
         title: imageIdTitle.title,
         img: `${this.baseUrl}/${AppSettings.IMAGES_API_PREFIX}/thumbnails/${imageIdTitle.id}`,
         fullImg: `${this.baseUrl}/${AppSettings.IMAGES_API_PREFIX}/full-images/${imageIdTitle.id}`
@@ -48,13 +55,18 @@ export class UserGalleryImageComponent implements OnInit {
 
 
 
-  display(pic:string):any
+  display(pic:ImageIdentificationInfo):any
   {
-    let dialogRef = this.dialog.open(MyDialogComponent, {
-      //width: '600px',
-      data: pic
+    this.imageService.getImageSummary(pic.id).subscribe(summary => {
+      let imageDetails: any = {};
+      imageDetails.summary = summary;
+      imageDetails.fullImgUrl = pic.fullImg;
+      this.dialog.open(MyDialogComponent, {
+        // width: '1080px',
+        // height: '600px',
+        data: imageDetails
+      });
     });
-    console.log("Clicked "+pic);
   }
 
 

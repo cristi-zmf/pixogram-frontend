@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {any} from "codelyzer/util/function";
 import {AppSettings} from "../app-settings";
 
 @Injectable({
@@ -12,5 +11,9 @@ export class ImageService {
   getImagesIds(userAddress: string): Observable<any> {
     const userAddressParsed = userAddress.replace('@', '%40');
     return this.httpClient.get(`${AppSettings.IMAGES_API_PREFIX}/${userAddressParsed}/images/id-titles`);
+  }
+
+  getImageSummary(id: string): Observable<any> {
+    return this.httpClient.get(`${AppSettings.IMAGES_API_PREFIX}/summaries/${id}`);
   }
 }
