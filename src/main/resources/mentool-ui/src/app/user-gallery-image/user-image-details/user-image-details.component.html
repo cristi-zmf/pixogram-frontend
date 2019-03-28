@@ -1,4 +1,12 @@
 <app-image-details *ngIf="imageSummary" [imageUrl]="imageSummary.getFullImgUrl()" [description]="imageSummary.description">
-
-
 </app-image-details>
+<mat-toolbar>Comments</mat-toolbar>
+
+<mat-card *ngFor="let comment of imageSummary.comments">
+  <mat-card-title>Johny Depp</mat-card-title>
+  <mat-form-field  appearance="outline" class="col-md-12">
+    <textarea matInput placeholder="Description" [value]="comment" [readonly]="true"></textarea>
+  </mat-form-field>
+</mat-card>
+
+

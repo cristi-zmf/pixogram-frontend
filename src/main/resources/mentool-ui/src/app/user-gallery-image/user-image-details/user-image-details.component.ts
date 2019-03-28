@@ -18,6 +18,7 @@ export class UserImageDetailsComponent implements OnInit {
     this.imageId = this.activatedRoute.snapshot.params['id'];
     this.imageService.getImageSummary(this.imageId).subscribe(data => {
       this.imageSummary = new ImageSummary(data);
+      this.imageSummary.comments.push("first comment");
     });
   }
 
