@@ -11,6 +11,7 @@ import {ImageSummary} from "../image-summary";
 export class UserImageDetailsComponent implements OnInit {
   private imageId: string;
   private imageSummary: ImageSummary;
+  private newComment: string;
 
   constructor(private activatedRoute: ActivatedRoute, private imageService: ImageService) {}
 
@@ -22,4 +23,8 @@ export class UserImageDetailsComponent implements OnInit {
     });
   }
 
+  addComment() {
+    this.imageSummary.comments.push(this.newComment);
+    this.newComment = '';
+  }
 }
