@@ -5,6 +5,7 @@ import {ImageService} from "./image.service";
 import {CurrentUserService} from "../login/current-user.service";
 import {AuthentifiedUser} from "../login/authentified-user";
 import {AppSettings} from "../app-settings";
+import {ImageSummary} from "./image-summary";
 
 interface ImageIdentificationInfo {
   id: string,
@@ -57,14 +58,11 @@ export class UserGalleryImageComponent implements OnInit {
 
   display(pic:ImageIdentificationInfo):any
   {
-    this.imageService.getImageSummary(pic.id).subscribe(summary => {
-      let imageDetails: any = {};
-      imageDetails.summary = summary;
-      imageDetails.fullImgUrl = pic.fullImg;
+    this.imageService.getImageSummary(pic.id).subscribe((summary: any) => {
       this.dialog.open(MyDialogComponent, {
         // width: '1080px',
         // height: '600px',
-        data: imageDetails
+        data: new ImageSummary(summary)
       });
     });
   }

@@ -1,0 +1,14 @@
+<div>
+  <div class="row">
+    <div class="col-md-12">
+      <img [src]="imageUrl"/>
+    </div>
+
+  </div>
+  <div class="row">
+    <mat-label class="col-md-12">Description</mat-label>
+    <mat-form-field appearance="outline" class="col-md-12">
+      <textarea matInput placeholder="Description" [value]="description" [readonly]="readOnly"></textarea>
+    </mat-form-field>
+  </div>
+</div>

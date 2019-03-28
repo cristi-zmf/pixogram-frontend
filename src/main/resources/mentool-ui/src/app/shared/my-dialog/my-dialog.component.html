@@ -1,13 +1,9 @@
 <mat-dialog-content>
-  <div class="row">
-    <img [src]="data.fullImgUrl" class="col-md-12"/>
-  </div>
-  <div class="row">
-    <mat-label class="col-md-12">Description</mat-label>
-    <mat-form-field appearance="outline" class="col-md-12">
-      <textarea matInput placeholder="Description" [value]="data.summary.description"></textarea>
-    </mat-form-field>
-  </div>
+<app-image-details
+  [description]="data.description"
+  [imageUrl]="data.getFullImgUrl()">
+</app-image-details>
+  <button mat-raised-button color="primary" (click)="openImageDetails()">Open image details</button>
 </mat-dialog-content>
 
 

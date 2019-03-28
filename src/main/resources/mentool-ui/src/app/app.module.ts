@@ -45,6 +45,8 @@ import {MomentDateModule} from "@angular/material-moment-adapter";
 import { UserGalleryImageComponent } from './user-gallery-image/user-gallery-image.component';
 import {MyDialogComponent} from "./shared/my-dialog/my-dialog.component";
 import { UserImageUploadComponent } from './user/user-image-upload/user-image-upload.component';
+import { ImageDetailsComponent } from './user-gallery-image/image-details/image-details.component';
+import { UserImageDetailsComponent } from './user-gallery-image/user-image-details/user-image-details.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { UserImageUploadComponent } from './user/user-image-upload/user-image-up
     TrainingsListComponent,
     MentorTrainingsComponent,
     UserGalleryImageComponent,
-    UserImageUploadComponent
+    UserImageUploadComponent,
+    ImageDetailsComponent,
+    UserImageDetailsComponent
   ],
   imports: [
     BrowserModule,
