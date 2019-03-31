@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-image-details',
@@ -13,9 +13,15 @@ export class ImageDetailsComponent implements OnInit {
   description: string;
   @Input()
   readOnly: boolean = true;
+
+  @Output()
+  descriptionChange: EventEmitter<string> = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
   }
 
+  onInputChange(value: string) {
+    this.descriptionChange.emit(this.description);
+  }
 }

@@ -1,25 +1,34 @@
 <div *ngIf="imageSummary">
   <mat-toolbar>{{imageSummary.title}}</mat-toolbar>
-  <app-image-details  [imageUrl]="imageSummary.getFullImgUrl()" [description]="imageSummary.description">
+  <div class="row">
+    <mat-form-field class="col-md-12" *ngIf="!readOnly">
+      <input matInput placeholder="New Title" [(ngModel)]="newTitle" [value]="newTitle"/>
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button color="primary" *ngIf="readOnly" (click)="enterEditMode()">Edit</button>
+  <button mat-raised-button color="primary" *ngIf="!readOnly" (click)="updateIdentificationInfo()">Save</button>
+  <button mat-raised-button color="primary" *ngIf="!readOnly" (click)="cancelModifications()">Cancel</button>
+  <app-image-details [imageUrl]="imageSummary.getFullImgUrl()"
+                     [description]="imageSummary.description" [readOnly]="readOnly"
+                     (descriptionChange)="updateDescription($event)">
   </app-image-details>
+
+
+  <mat-toolbar>Comments</mat-toolbar>
+  <div>
+    <mat-form-field appearance="outline" class="col-md-12">
+      <mat-label>Add comment</mat-label>
+      <textarea matInput placeholder="New comment..." [(ngModel)]="newComment" [value]="newComment"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="addComment()">Add comment</button>
+  </div>
+
+  <mat-card *ngFor="let comment of imageSummary.comments">
+    <mat-card-title>Johny Depp</mat-card-title>
+    <mat-form-field appearance="outline" class="col-md-12">
+      <textarea matInput placeholder="Description" [value]="comment" [readonly]="true"></textarea>
+    </mat-form-field>
+  </mat-card>
 </div>
-
-
-
-<mat-toolbar>Comments</mat-toolbar>
-<div>
-  <mat-form-field  appearance="outline" class="col-md-12">
-    <mat-label>Add comment</mat-label>
-    <textarea matInput placeholder="New comment..." [(ngModel)]="newComment" [value]="newComment"></textarea>
-  </mat-form-field>
-  <button mat-raised-button color="primary" (click)="addComment()">Add comment</button>
-</div>
-
-<mat-card *ngFor="let comment of imageSummary.comments">
-  <mat-card-title>Johny Depp</mat-card-title>
-  <mat-form-field  appearance="outline" class="col-md-12">
-    <textarea matInput placeholder="Description" [value]="comment" [readonly]="true"></textarea>
-  </mat-form-field>
-</mat-card>
-
 

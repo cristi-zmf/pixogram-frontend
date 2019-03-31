@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AppSettings} from "../app-settings";
+import {ImageIdentificationInfoUpdateCommand} from "./user-image-details/image-identification-info-update-command";
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +16,9 @@ export class ImageService {
 
   getImageSummary(id: string): Observable<any> {
     return this.httpClient.get(`${AppSettings.IMAGES_API_PREFIX}/summaries/${id}`);
+  }
+
+  updateImageIdentificationInfo(updateCommand: ImageIdentificationInfoUpdateCommand): Observable<any> {
+    return this.httpClient.post(`${AppSettings.IMAGES_API_PREFIX}/update-identification-info`, updateCommand);
   }
 }

@@ -7,7 +7,8 @@
   <div class="row">
     <mat-label class="col-md-12">Description</mat-label>
     <mat-form-field appearance="outline" class="col-md-12">
-      <textarea matInput placeholder="Description" [value]="description" [readonly]="readOnly"></textarea>
+      <textarea matInput placeholder="Description"
+                [(ngModel)]="description" [readonly]="readOnly" (input)="onInputChange($event)" ></textarea>
     </mat-form-field>
   </div>
 </div>

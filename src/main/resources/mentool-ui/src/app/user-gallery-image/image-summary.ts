@@ -4,7 +4,7 @@ const baseUrl = window.location.origin;
 export class ImageSummary {
   public fullImgUrl: string;
   public thumbnailUrl: string;
-
+  public owner: string;
   public id: string;
   public title: string;
   public description: string;
@@ -12,12 +12,14 @@ export class ImageSummary {
   public likes: Array<string>;
   public dislikes: Array<string>;
 
+
   constructor(
     json: any
   ) {
     this.id = json.id;
     this.title = json.title;
     this.description = json.description;
+    this.owner = json.owner;
     this.comments = json.comments;
     this.likes = json.likes;
     this.dislikes = json.dislikes;

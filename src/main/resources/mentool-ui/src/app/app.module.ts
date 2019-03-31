@@ -91,6 +91,7 @@ import { UserImageDetailsComponent } from './user-gallery-image/user-image-detai
     MatNativeDateModule,
     MatToolbarModule,
     MatDialogModule,
+    MatInputModule,
     MatIconModule,
     MatProgressBarModule,
     MatListModule,
