@@ -146,4 +146,25 @@ export class UserImageDetailsComponent implements OnInit, OnDestroy {
     comment.value = this.copyOfUneditedComment.value;
     this.copyOfUneditedComment = null;
   }
+
+
+  like(comment: CommentDetails) {
+    this.commentService.likeComment(comment.generateLikeDislikeCommand(this.currentUser.username)).subscribe(() => {
+      this.reloadLikesDislikes(comment);
+    });
+  }
+
+  dislike(comment: CommentDetails) {
+    this.commentService.dislikeComment(comment.generateLikeDislikeCommand(this.currentUser.username)).subscribe(() => {
+      this.reloadLikesDislikes(comment);
+    });
+  }
+
+  private reloadLikesDislikes(comment: CommentDetails) {
+    this.commentService.consultComment(comment.id).subscribe(consultedCommentJson => {
+      let refreshedComment: CommentDetails = CommentDetails.fromJson(consultedCommentJson);
+      comment.likes = refreshedComment.likes;
+      comment.dislikes = refreshedComment.dislikes
+    });
+  }
 }

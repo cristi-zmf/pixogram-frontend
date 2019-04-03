@@ -1,4 +1,5 @@
 import {EditCommentCommand} from "./edit-comment-command";
+import {LikeDislikeCommand} from "./like-dislike-command";
 
 export class CommentDetails {
   public constructor(
@@ -45,5 +46,17 @@ export class CommentDetails {
 
   public generateEditCommand(): EditCommentCommand {
     return new EditCommentCommand(this.id, this.value, this.author, this.imageId);
+  }
+
+  public generateLikeDislikeCommand(currentUser: string): LikeDislikeCommand {
+    return new LikeDislikeCommand(this.id, currentUser);
+  }
+
+  public getNumberOfLikes(): number{
+    return this.likes.length;
+  }
+
+  public getNumberOfDislikes(): number{
+    return this.dislikes.length;
   }
 }
