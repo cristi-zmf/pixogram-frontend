@@ -2,7 +2,7 @@ package com.cristi.mentool.mentoolfront.exposition.user;
 
 import com.cristi.mentool.mentoolfront.domain.Role;
 import com.cristi.mentool.mentoolfront.domain.security.AddNewUser;
-import com.cristi.mentool.mentoolfront.exposition.MentoolRequestMapping;
+import com.cristi.mentool.mentoolfront.exposition.PixogramBaseRequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.http.HttpEntity;
@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 
-@MentoolRequestMapping
+@PixogramBaseRequestMapping
 public class UserRegistrationResource {
     private final AddNewUser addNewUser;
     private final RestTemplate restTemplate;

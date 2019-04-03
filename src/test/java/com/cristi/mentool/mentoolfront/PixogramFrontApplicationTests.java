@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MentoolFrontApplicationTests {
+public class PixogramFrontApplicationTests {
 
 	@Test
 	public void contextLoads() {

@@ -4,7 +4,7 @@ import com.cristi.mentool.mentoolfront.domain.EmailAddress;
 import com.cristi.mentool.mentoolfront.domain.security.Users;
 import com.cristi.mentool.mentoolfront.domain.security.User;
 import com.cristi.mentool.mentoolfront.domain.security.RoleConstants;
-import com.cristi.mentool.mentoolfront.exposition.MentoolRequestMapping;
+import com.cristi.mentool.mentoolfront.exposition.PixogramBaseRequestMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
 
-@MentoolRequestMapping
+@PixogramBaseRequestMapping
 public class UserResource {
 
     private Users users;

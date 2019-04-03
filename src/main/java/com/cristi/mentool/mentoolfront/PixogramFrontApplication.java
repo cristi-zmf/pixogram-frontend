@@ -5,15 +5,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableEurekaClient
 @EnableZuulProxy
 @RibbonClient(name = "default-ribbon")
-public class MentoolFrontApplication {
+@EnableFeignClients
+public class PixogramFrontApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MentoolFrontApplication.class, args);
+		SpringApplication.run(PixogramFrontApplication.class, args);
 	}
 
 }

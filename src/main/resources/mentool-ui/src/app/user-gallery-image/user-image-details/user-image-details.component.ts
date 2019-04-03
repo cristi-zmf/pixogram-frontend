@@ -57,11 +57,12 @@ export class UserImageDetailsComponent implements OnInit, OnDestroy {
   }
 
   updateIdentificationInfo() {
-    let updateCommand: ImageIdentificationInfoUpdateCommand = {};
-    updateCommand.title = this.newTitle;
-    updateCommand.description = this.newDescription;
-    updateCommand.imageId = this.imageSummary.id;
-    updateCommand.owner = this.imageSummary.owner;
+    let updateCommand: ImageIdentificationInfoUpdateCommand = {
+      title: this.newTitle,
+      description: this.newDescription,
+      imageId: this.imageSummary.id,
+      owner: this.imageSummary.owner
+    };
     this.imageService.updateImageIdentificationInfo(updateCommand).subscribe(
       answer => {
         this.readOnly = true;

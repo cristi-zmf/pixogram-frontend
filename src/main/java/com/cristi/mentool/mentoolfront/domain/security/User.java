@@ -124,4 +124,8 @@ public class User extends BaseEntity<User, EmailAddress> implements UserDetails 
     public String getFirstName() {
         return firstName;
     }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
 }

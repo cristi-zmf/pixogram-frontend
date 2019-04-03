@@ -16,5 +16,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @RestController
 @Transactional
-public @interface MentoolRequestMapping {
+public @interface PixogramBaseRequestMapping {
 }
