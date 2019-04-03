@@ -1,5 +1,5 @@
 <div *ngIf="imageSummary">
-  <mat-toolbar>{{imageSummary.title}}</mat-toolbar>
+  <mat-toolbar>{{imageSummary.getTitle()}}</mat-toolbar>
   <div class="row">
     <mat-form-field class="col-md-12" *ngIf="!readOnly">
       <input matInput placeholder="New Title" [(ngModel)]="newTitle" [value]="newTitle"/>
@@ -21,14 +21,29 @@
       <mat-label>Add comment</mat-label>
       <textarea matInput placeholder="New comment..." [(ngModel)]="newComment" [value]="newComment"></textarea>
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="addComment()">Add comment</button>
+    <button mat-raised-button color="primary" (click)="addComment()" [disabled]="isEmptyString(newComment)">Add
+      comment
+    </button>
   </div>
-
-  <mat-card *ngFor="let comment of imageSummary.comments">
-    <mat-card-title>Johny Depp</mat-card-title>
-    <mat-form-field appearance="outline" class="col-md-12">
-      <textarea matInput placeholder="Description" [value]="comment" [readonly]="true"></textarea>
-    </mat-form-field>
-  </mat-card>
+  <div *ngIf="comments">
+    <mat-card *ngFor="let comment of comments">
+      <mat-card-title>{{comment.fullName}}</mat-card-title>
+      <mat-form-field appearance="outline" class="col-md-12">
+        <textarea matInput placeholder="Description" [value]="comment.value" [readonly]="comment.isNotInEditMode()" [(ngModel)]="comment.value"></textarea>
+      </mat-form-field>
+      <div *ngIf="commentAuthorIsLoggedUser(comment) && comment.isNotInEditMode()">
+        <button mat-raised-button color="primary" (click)="enterEditComment(comment)">Edit
+        </button>
+        <button mat-raised-button color="warn" (click)="deleteComment(comment)">Delete
+        </button>
+      </div>
+      <div *ngIf="comment.isInEditMode()">
+        <button mat-raised-button color="primary" (click)="saveCommentModification(comment)">Save
+        </button>
+        <button mat-raised-button color="primary" (click)="cancelEditOfComment(comment)">Cancel
+        </button>
+      </div>
+    </mat-card>
+  </div>
 </div>
 

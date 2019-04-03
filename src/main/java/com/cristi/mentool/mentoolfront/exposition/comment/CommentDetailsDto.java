@@ -18,6 +18,8 @@ import static java.util.stream.Collectors.toSet;
 public class CommentDetailsDto {
     @JsonProperty public String id;
     @JsonProperty public String author;
+    @JsonProperty public String fullName;
+    @JsonProperty public String value;
     @JsonProperty public String imageId;
     @JsonProperty public Set<String> likes;
     @JsonProperty public Set<String> dislikes;
@@ -36,6 +38,8 @@ public class CommentDetailsDto {
     public CommentDetailsDto resolveNames(Map<String, String> addressesToNames) {
         Set<String> resolvedLikes = likes.stream().map(addressesToNames::get).collect(toSet());
         Set<String> resolvedDislikes = dislikes.stream().map(addressesToNames::get).collect(toSet());
-        return new CommentDetailsDto(id, addressesToNames.get(author), imageId, resolvedLikes, resolvedDislikes, lastModified);
+        return new CommentDetailsDto(
+                id, author, addressesToNames.get(author), value, imageId, resolvedLikes, resolvedDislikes, lastModified
+        );
     }
 }

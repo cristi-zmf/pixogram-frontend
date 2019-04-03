@@ -41,6 +41,14 @@ export class ImageSummary {
     return `${baseUrl}/${AppSettings.IMAGES_API_PREFIX}/full-images/${this.id}`;
   }
 
+  public getTitle(): string {
+    if (!this.title || this.title === '') {
+      return 'No title available';
+    } else {
+      return this.title;
+    }
+  }
+
   public getThumbnailUrl(id: string): string {
     return `${baseUrl}/${AppSettings.IMAGES_API_PREFIX}/thumbnails/${this.id}`;
   }
