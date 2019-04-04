@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AppSettings} from "../app-settings";
 import {ImageIdentificationInfoUpdateCommand} from "./user-image-details/image-identification-info-update-command";
+import {LikeDislikeCommand} from "../comment/like-dislike-command";
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,13 @@ export class ImageService {
 
   updateImageIdentificationInfo(updateCommand: ImageIdentificationInfoUpdateCommand): Observable<any> {
     return this.httpClient.post(`${AppSettings.IMAGES_API_PREFIX}/update-identification-info`, updateCommand);
+  }
+
+  public likeImage(command: LikeDislikeCommand): Observable<any> {
+    return this.httpClient.put(`${AppSettings.IMAGES_API_PREFIX}/like-image`, command);
+  }
+
+  public dislikeImage(command: LikeDislikeCommand): Observable<any> {
+    return this.httpClient.put(`${AppSettings.IMAGES_API_PREFIX}/dislike-image`, command);
   }
 }

@@ -1,4 +1,6 @@
 import {AppSettings} from "../app-settings";
+import {AuthentifiedUser} from "../login/authentified-user";
+import {LikeDislikeCommand} from "../comment/like-dislike-command";
 
 const baseUrl = window.location.origin;
 export class ImageSummary {
@@ -49,7 +51,29 @@ export class ImageSummary {
     }
   }
 
+  public getNumberOfLikes(): number {
+    return this.likes.length;
+  }
+
+  public getNumberOfDislikes(): number {
+    return this.dislikes.length;
+  }
+
   public getThumbnailUrl(id: string): string {
     return `${baseUrl}/${AppSettings.IMAGES_API_PREFIX}/thumbnails/${this.id}`;
+  }
+
+  public generateLikeDislikeCommand(author: AuthentifiedUser): LikeDislikeCommand {
+    return new LikeDislikeCommand(this.id, author.username);
+  }
+
+  public updateIdentificationInfoFromOtherSummary(other: ImageSummary): void {
+    this.description = other.description;
+    this.title = other.title;
+  }
+
+  public updateLikesDislikeBaseOnSummary(other: ImageSummary) {
+    this.likes = other.likes;
+    this.dislikes = other.dislikes;
   }
 }

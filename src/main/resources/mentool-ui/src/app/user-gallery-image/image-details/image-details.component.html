@@ -1,14 +1,22 @@
 <div>
   <div class="row">
     <div class="col-md-12">
-      <img [src]="imageUrl"/>
+      <img [src]="imageSummary.getFullImgUrl()"/>
     </div>
+  </div>
+  <div id="likes">
+    <button mat-icon-button aria-label="Example icon-button with a heart icon" color="primary" (click)="like()">
+      <mat-icon>thumb_up</mat-icon>{{imageSummary.getNumberOfLikes()}}
+    </button>
+    <button mat-icon-button aria-label="Example icon-button with a heart icon" color="warn" (click)="dislike()">
+      <mat-icon>thumb_down</mat-icon>{{imageSummary.getNumberOfDislikes()}}
+    </button>
   </div>
   <div class="row">
     <mat-label class="col-md-12">Description</mat-label>
     <mat-form-field appearance="outline" class="col-md-12">
       <textarea matInput placeholder="Description"
-                [(ngModel)]="description" [readonly]="readOnly" (input)="onInputChange($event)" ></textarea>
+                [(ngModel)]="imageSummary.description" [readonly]="readOnly" (input)="onInputChange($event)" ></textarea>
     </mat-form-field>
   </div>
 </div>

@@ -9,8 +9,8 @@
   <button mat-raised-button color="primary" *ngIf="readOnly" (click)="enterEditMode()">Edit</button>
   <button mat-raised-button color="primary" *ngIf="!readOnly" (click)="updateIdentificationInfo()">Save</button>
   <button mat-raised-button color="primary" *ngIf="!readOnly" (click)="cancelModifications()">Cancel</button>
-  <app-image-details [imageUrl]="imageSummary.getFullImgUrl()"
-                     [description]="imageSummary.description" [readOnly]="readOnly"
+  <app-image-details [imageSummary]="imageSummary"
+                     [readOnly]="readOnly"
                      (descriptionChange)="updateDescription($event)">
   </app-image-details>
 

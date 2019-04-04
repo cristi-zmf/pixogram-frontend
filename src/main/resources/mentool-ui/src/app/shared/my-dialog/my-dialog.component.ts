@@ -11,13 +11,13 @@ import {Router} from "@angular/router";
 })
 export class MyDialogComponent implements OnInit {
   constructor(
-    public thisDialogRef: MatDialogRef<MyDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: ImageSummary,
+    public thisDialogRef: MatDialogRef<MyDialogComponent>, @Inject(MAT_DIALOG_DATA) public imageSummary: ImageSummary,
     private router: Router
   ) {
   }
 
   ngOnInit() {
-    console.log(this.data.getFullImgUrl());
+    console.log(this.imageSummary.getFullImgUrl());
   }
 
   onCloseConfirm() {
@@ -29,7 +29,7 @@ export class MyDialogComponent implements OnInit {
   }
 
   openImageDetails() {
-    this.router.navigate([`user/image-details/${this.data.id}`]);
+    this.router.navigate([`user/image-details/${this.imageSummary.id}`]);
     this.thisDialogRef.close();
   }
 }

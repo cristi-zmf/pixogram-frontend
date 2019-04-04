@@ -1,7 +1,6 @@
 <mat-dialog-content>
 <app-image-details
-  [description]="data.description"
-  [imageUrl]="data.getFullImgUrl()">
+  [imageSummary]="imageSummary">
 </app-image-details>
   <button mat-raised-button color="primary" (click)="openImageDetails()">Open image details</button>
 </mat-dialog-content>

@@ -94,11 +94,18 @@ export class UserImageDetailsComponent implements OnInit, OnDestroy {
       owner: this.imageSummary.owner
     };
     this.imageService.updateImageIdentificationInfo(updateCommand).subscribe(
-      answer => {
+      () => {
         this.readOnly = true;
-        this.router.navigate([`user/image-details/${answer}`]);
+        this.setNewIdentificationInfoValidatedFromBackend();
       }
     );
+  }
+
+  private setNewIdentificationInfoValidatedFromBackend() {
+    this.imageService.getImageSummary(this.imageSummary.id).subscribe(data => {
+      let imageSummaryFromBackend = new ImageSummary(data);
+      this.imageSummary.updateIdentificationInfoFromOtherSummary(imageSummaryFromBackend);
+    });
   }
 
   cancelModifications() {
