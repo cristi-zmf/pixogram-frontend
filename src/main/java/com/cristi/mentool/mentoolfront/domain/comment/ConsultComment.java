@@ -2,8 +2,8 @@ package com.cristi.mentool.mentoolfront.domain.comment;
 
 import com.cristi.mentool.mentoolfront.domain.EmailAddress;
 import com.cristi.mentool.mentoolfront.domain.UniqueId;
-import com.cristi.mentool.mentoolfront.domain.security.User;
-import com.cristi.mentool.mentoolfront.domain.security.Users;
+import com.cristi.mentool.mentoolfront.domain.user.User;
+import com.cristi.mentool.mentoolfront.domain.user.Users;
 import com.cristi.mentool.mentoolfront.exposition.comment.CommentDetailsDto;
 import com.cristi.mentool.mentoolfront.infra.comment.CommentFeignClient;
 import org.springframework.stereotype.Service;

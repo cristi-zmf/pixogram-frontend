@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Authority} from "./authority";
+import {UserConsult} from "./user";
 import {AppSettings} from "../app-settings";
 import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthoritiesService {
+export class UsersService {
 
   constructor(private http: HttpClient) { }
 

@@ -58,4 +58,8 @@ export class AppComponent {
       return this.loginUrl;
     }
   }
+
+  getUrlForUserGallery() {
+    return this.currentUser ? `/user/image/${this.currentUser.username}` : this.loginUrl;
+  }
 }

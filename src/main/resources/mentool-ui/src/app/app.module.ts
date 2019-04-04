@@ -10,11 +10,14 @@ import {
   MatCardModule,
   MatDatepickerModule,
   MatDialogModule,
-  MatFormFieldModule, MatIconModule,
-  MatInputModule, MatListModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
   MatMenuModule,
   MatNativeDateModule,
-  MatPaginatorModule, MatProgressBarModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
   MatRippleModule,
   MatSelectModule,
   MatTableModule,
@@ -22,7 +25,7 @@ import {
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {AuthoritiesComponent} from './authorities/authorities.component';
+import {UsersComponent} from './authorities/users.component';
 import {JwtInterceptorService} from "./jwt-interceptor.service";
 import {TrainingSearchComponent} from './training/training-search.component';
 import {SkillPickerComponent} from './skill/skill-picker.component';
@@ -42,17 +45,17 @@ import {MentorTrainingsComponent} from './user/mentor-trainings/mentor-trainings
 import {MatDatetimepickerModule} from "@mat-datetimepicker/core";
 import {MatMomentDatetimeModule} from "@mat-datetimepicker/moment";
 import {MomentDateModule} from "@angular/material-moment-adapter";
-import { UserGalleryImageComponent } from './user-gallery-image/user-gallery-image.component';
+import {UserGalleryImageComponent} from './user-gallery-image/user-gallery-image.component';
 import {MyDialogComponent} from "./shared/my-dialog/my-dialog.component";
-import { UserImageUploadComponent } from './user/user-image-upload/user-image-upload.component';
-import { ImageDetailsComponent } from './user-gallery-image/image-details/image-details.component';
-import { UserImageDetailsComponent } from './user-gallery-image/user-image-details/user-image-details.component';
+import {UserImageUploadComponent} from './user/user-image-upload/user-image-upload.component';
+import {ImageDetailsComponent} from './user-gallery-image/image-details/image-details.component';
+import {UserImageDetailsComponent} from './user-gallery-image/user-image-details/user-image-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    AuthoritiesComponent,
+    UsersComponent,
     TrainingSearchComponent,
     SkillPickerComponent,
     DatepickerComponent,

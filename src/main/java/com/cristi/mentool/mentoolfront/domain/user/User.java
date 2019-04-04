@@ -1,4 +1,4 @@
-package com.cristi.mentool.mentoolfront.domain.security;
+package com.cristi.mentool.mentoolfront.domain.user;
 
 import com.cristi.mentool.mentoolfront.domain.BaseEntity;
 import com.cristi.mentool.mentoolfront.domain.EmailAddress;

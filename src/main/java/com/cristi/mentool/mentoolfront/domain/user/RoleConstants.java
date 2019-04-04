@@ -1,4 +1,4 @@
-package com.cristi.mentool.mentoolfront.domain.security;
+package com.cristi.mentool.mentoolfront.domain.user;
 
 public class RoleConstants {
     public final static String ADMIN = "ADMIN";

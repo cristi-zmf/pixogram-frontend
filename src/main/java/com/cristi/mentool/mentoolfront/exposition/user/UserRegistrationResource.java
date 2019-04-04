@@ -1,7 +1,7 @@
 package com.cristi.mentool.mentoolfront.exposition.user;
 
 import com.cristi.mentool.mentoolfront.domain.Role;
-import com.cristi.mentool.mentoolfront.domain.security.AddNewUser;
+import com.cristi.mentool.mentoolfront.domain.user.AddNewUser;
 import com.cristi.mentool.mentoolfront.exposition.PixogramBaseRequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;

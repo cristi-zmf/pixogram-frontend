@@ -14,3 +14,8 @@
     <img mat-card-image [src]="picture.img">
   </mat-card>
 </div>
+<div *ngIf="thereAreNoPictures()">
+  <mat-toolbar>
+    No pictures available
+  </mat-toolbar>
+</div>

@@ -1,8 +1,8 @@
 package com.cristi.mentool.mentoolfront.infra.persistence;
 
 import com.cristi.mentool.mentoolfront.domain.EmailAddress;
-import com.cristi.mentool.mentoolfront.domain.security.Users;
-import com.cristi.mentool.mentoolfront.domain.security.User;
+import com.cristi.mentool.mentoolfront.domain.user.Users;
+import com.cristi.mentool.mentoolfront.domain.user.User;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

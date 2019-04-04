@@ -1,7 +1,7 @@
 package com.cristi.mentool.mentoolfront.exposition.authentication;
 
 
-import com.cristi.mentool.mentoolfront.domain.security.User;
+import com.cristi.mentool.mentoolfront.domain.user.User;
 import com.cristi.mentool.mentoolfront.exposition.PixogramBaseRequestMapping;
 import com.cristi.mentool.mentoolfront.infra.security.TokenProvider;
 import org.springframework.security.authentication.AuthenticationManager;

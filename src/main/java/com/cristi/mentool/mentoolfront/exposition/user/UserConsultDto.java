@@ -1,7 +1,7 @@
 package com.cristi.mentool.mentoolfront.exposition.user;
 
 import com.cristi.mentool.mentoolfront.domain.Role;
-import com.cristi.mentool.mentoolfront.domain.security.User;
+import com.cristi.mentool.mentoolfront.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 

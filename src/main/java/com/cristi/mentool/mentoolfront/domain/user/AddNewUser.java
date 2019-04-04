@@ -1,4 +1,4 @@
-package com.cristi.mentool.mentoolfront.domain.security;
+package com.cristi.mentool.mentoolfront.domain.user;
 
 import com.cristi.mentool.mentoolfront.domain.EmailAddress;
 import com.cristi.mentool.mentoolfront.exposition.UserCreateCommand;

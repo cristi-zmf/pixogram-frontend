@@ -1,6 +1,6 @@
 package com.cristi.mentool.mentoolfront.infra;
 
-import com.cristi.mentool.mentoolfront.domain.security.AddNewUser;
+import com.cristi.mentool.mentoolfront.domain.user.AddNewUser;
 import com.cristi.mentool.mentoolfront.exposition.UserCreateCommand;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

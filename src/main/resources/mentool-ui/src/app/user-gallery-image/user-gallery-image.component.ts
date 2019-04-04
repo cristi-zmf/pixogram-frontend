@@ -6,6 +6,7 @@ import {CurrentUserService} from "../login/current-user.service";
 import {AuthentifiedUser} from "../login/authentified-user";
 import {AppSettings} from "../app-settings";
 import {ImageSummary} from "./image-summary";
+import {ActivatedRoute} from "@angular/router";
 
 interface ImageIdentificationInfo {
   id: string,
@@ -21,14 +22,19 @@ interface ImageIdentificationInfo {
 })
 export class UserGalleryImageComponent implements OnInit {
   title = 'app';
-  user: AuthentifiedUser;
+  userAddress: string;
   userImageIds: Array<{id: string, title: string}>;
   processedImages: ImageIdentificationInfo[] = [];
   baseUrl: string = window.location.origin;
 
+  constructor(
+    private dialog: MatDialog, private imageService: ImageService,
+    private currentUserService: CurrentUserService, private activatedRoute: ActivatedRoute
+  ) {}
+
   ngOnInit(): void {
-    this.user = this.currentUserService.getCurrentUser();
-    this.imageService.getImagesIds(this.user.username).subscribe(
+    this.userAddress = this.activatedRoute.snapshot.params['id'];
+    this.imageService.getImagesIds(this.userAddress).subscribe(
       (imageIds: Array<{id: string, title: string}>) => {
         this.userImageIds = imageIds;
         this.preparePicturesUrls();
@@ -52,7 +58,7 @@ export class UserGalleryImageComponent implements OnInit {
 
   }
 
-  constructor(private dialog: MatDialog, private imageService: ImageService, private currentUserService: CurrentUserService) {}
+
 
 
 
@@ -68,4 +74,7 @@ export class UserGalleryImageComponent implements OnInit {
   }
 
 
+  thereAreNoPictures(): boolean {
+    return !this.processedImages || this.processedImages.length === 0;
+  }
 }
