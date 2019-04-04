@@ -4,6 +4,8 @@ import {UserConsult} from "./user";
 import {Router} from "@angular/router";
 import {UsersService} from "./users.service";
 import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
+import {CurrentUserService} from "../login/current-user.service";
+import {AuthentifiedUser} from "../login/authentified-user";
 
 @Component({
   selector: 'app-authorities',
@@ -24,10 +26,15 @@ export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['email', 'firstName', 'lastName', 'subscribed'];
   dataIsAvailable: boolean = false;
   selectedRow: any = null;
+  currentUser: AuthentifiedUser;
+  currentUserAddress: string;
 
 
 
-  constructor(private http: HttpClient, private router: Router, private authorityService: UsersService) {
+  constructor(
+    private http: HttpClient, private router: Router,
+    private userService: UsersService, private currentUserService: CurrentUserService
+  ) {
     this.http = http;
     this.router = router;
   }
@@ -38,7 +45,9 @@ export class UsersComponent implements OnInit {
   }
 
   private refreshData() {
-    this.authorityService.getAuthorities().subscribe(
+    this.currentUser = this.currentUserService.getCurrentUser();
+    this.currentUserAddress = this.currentUser.username;
+    this.userService.getUsers().subscribe(
       (usersFromBack: [any]) => {
         const userConsults = usersFromBack.map(e => {return UserConsult.fromJson(e)});
         this.dataSource = new MatTableDataSource(userConsults);
@@ -82,14 +91,33 @@ export class UsersComponent implements OnInit {
   }
 
   lockSelectedUser() {
-    this.authorityService.lockAuthority(this.selectedRow.email).subscribe(
+    this.userService.lockAuthority(this.selectedRow.email).subscribe(
       () => this.refreshData()
     )
   }
 
   unlockSelectedUser() {
-    this.authorityService.unlockAuthority(this.selectedRow.email).subscribe(
+    this.userService.unlockAuthority(this.selectedRow.email).subscribe(
       () => this.refreshData()
     )
+  }
+
+  follow(element: UserConsult) {
+    this.userService.followUser(element.generateFollowUnfollowCommand(this.currentUserAddress)).subscribe(() =>{
+      this.refreshUserElement(element);
+    });
+  }
+
+  unfollow(element: UserConsult) {
+    this.userService.unfollowUser(element.generateFollowUnfollowCommand(this.currentUserAddress)).subscribe(() =>{
+      this.refreshUserElement(element);
+    });
+  }
+
+
+  private refreshUserElement(element: UserConsult) {
+    this.userService.getUser(element.email).subscribe((data: any) => {
+      element.refreshSubscribed(UserConsult.fromJson(data));
+    });
   }
 }

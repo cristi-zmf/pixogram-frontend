@@ -1,35 +1,45 @@
 package com.cristi.mentool.mentoolfront.exposition.user;
 
 import com.cristi.mentool.mentoolfront.domain.EmailAddress;
-import com.cristi.mentool.mentoolfront.domain.user.Users;
-import com.cristi.mentool.mentoolfront.domain.user.User;
-import com.cristi.mentool.mentoolfront.domain.user.RoleConstants;
+import com.cristi.mentool.mentoolfront.domain.user.*;
 import com.cristi.mentool.mentoolfront.exposition.PixogramBaseRequestMapping;
+import com.cristi.mentool.mentoolfront.exposition.SingleValueDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.Set;
 
-import static java.util.stream.Collectors.toSet;
+import static org.springframework.http.ResponseEntity.ok;
 
 @PixogramBaseRequestMapping
 public class UserResource {
+    private final Users users;
+    private final ListUsers listUsers;
+    private final FollowUnfollowUser followUnfollowUser;
+    private final ConsultUser consultUser;
 
-    private Users users;
-
-    public UserResource(Users users) {
+    public UserResource(Users users, ListUsers listUsers, FollowUnfollowUser followUnfollowUser, ConsultUser consultUser) {
         this.users = users;
+        this.listUsers = listUsers;
+        this.followUnfollowUser = followUnfollowUser;
+        this.consultUser = consultUser;
     }
 
     @GetMapping(value = "/users")
     public Set<UserConsultDto> getUsers() throws AuthenticationException {
-        return users.findAll().stream()
-                .map(UserConsultDto::new)
-                .collect(toSet());
+        return listUsers.listUsers();
+    }
+
+    @PutMapping(value = "/users/follow-user")
+    public SingleValueDto<String> followUser(@RequestBody FollowUnfollowCommandDto command) {
+        return new SingleValueDto<>(followUnfollowUser.followUser(command).getValue());
+    }
+
+    @PutMapping(value = "/users/unfollow-user")
+    public SingleValueDto<String> unfollowUser(@RequestBody FollowUnfollowCommandDto command) {
+        return new SingleValueDto<>(followUnfollowUser.unfollowUser(command).getValue());
     }
 
     @PostMapping("/users/{accountAddress}/lock")
@@ -37,12 +47,12 @@ public class UserResource {
     public ResponseEntity<Boolean> lockUserAccount(@PathVariable EmailAddress accountAddress) {
         User userUser = users.findById(accountAddress);
         userUser.lockUser();
-        return ResponseEntity.ok(true);
+        return ok(true);
     }
 
     @GetMapping("/users/{accountAddress}")
     public UserConsultDto getUser(@PathVariable EmailAddress accountAddress) {
-        return new UserConsultDto(users.findById(accountAddress));
+        return consultUser.consultUser(accountAddress);
     }
 
     @PostMapping("/users/{accountAddress}/unlock")
@@ -50,7 +60,7 @@ public class UserResource {
     public ResponseEntity<Boolean> unlockUserAccount(@PathVariable EmailAddress accountAddress) {
         User userUser = users.findById(accountAddress);
         userUser.unlockUser();
-        return ResponseEntity.ok(true);
+        return ok(true);
     }
 
 }

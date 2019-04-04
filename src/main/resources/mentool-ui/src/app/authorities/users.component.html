@@ -25,16 +25,26 @@
       <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
     </ng-container>
 
+    <!--Followed column-->
     <ng-container matColumnDef="subscribed">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let element" >
-        <button *ngIf="!element.subscribed" mat-raised-button color="primary" >Subscribe</button>
-        <button *ngIf="element.subscribed" mat-raised-button color="warn" >Unsubscribe</button>
+        <button *ngIf="!element.subscribed" mat-raised-button color="primary" (click)="follow(element)">Subscribe</button>
+        <button *ngIf="element.subscribed" mat-raised-button color="warn" (click)="unfollow(element)">Unsubscribe</button>
+        <button mat-raised-button color="primary" (click)="viewUserGallery(element)">View Gallery</button>
       </td>
     </ng-container>
 
+    <!--View gallery column-->
+    <!--<ng-container matColumnDef="subscribed">-->
+      <!--<th mat-header-cell *matHeaderCellDef> Gallery </th>-->
+      <!--<td mat-cell *matCellDef="let element" >-->
+        <!--<button mat-raised-button color="primary" (click)="viewUserGallery(element)">View Gallery</button>-->
+      <!--</td>-->
+    <!--</ng-container>-->
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="viewUserGallery(row)"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   <mat-paginator *ngIf="dataSource" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   <br>

@@ -3,6 +3,7 @@ package com.cristi.mentool.mentoolfront.domain.user;
 import com.cristi.mentool.mentoolfront.domain.BaseEntity;
 import com.cristi.mentool.mentoolfront.domain.EmailAddress;
 import com.cristi.mentool.mentoolfront.domain.Role;
+import com.cristi.mentool.mentoolfront.exposition.user.UserConsultDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +12,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import static java.util.Collections.singleton;
 
@@ -48,6 +51,9 @@ public class User extends BaseEntity<User, EmailAddress> implements UserDetails 
     @Column(name = "ENABLED")
     private boolean enabled;
 
+    @ElementCollection
+    private Set<EmailAddress> following;
+
 
     public User(
             @NotNull EmailAddress username, @NotNull Role role, @NotBlank String passwordHash,
@@ -62,6 +68,7 @@ public class User extends BaseEntity<User, EmailAddress> implements UserDetails 
         this.accountNonExpired = true;
         this.credentialNonExpired = true;
         this.enabled = true;
+        this.following = new HashSet<>();
         validate(this);
     }
 
@@ -127,5 +134,17 @@ public class User extends BaseEntity<User, EmailAddress> implements UserDetails 
 
     public String getFullName() {
         return firstName + " " + lastName;
+    }
+
+    public void follow(EmailAddress userToFollow) {
+        following.add(userToFollow);
+    }
+
+    public void unfollow(EmailAddress userToUnfollow) {
+        following.remove(userToUnfollow);
+    }
+
+    public boolean isFollowedBy(User follower) {
+        return follower.following.contains(getId());
     }
 }
