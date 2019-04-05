@@ -74,6 +74,10 @@ export class UserImageDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
+  canEdit(): boolean {
+    return this.currentUser.username === this.imageSummary.owner && this.readOnly;
+  }
+
   deleteComment(comment: CommentDetails) {
     this.commentService.deleteComment(comment.id).subscribe(() => {
       this.reloadComponent();

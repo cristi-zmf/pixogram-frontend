@@ -6,7 +6,7 @@
     </mat-form-field>
   </div>
 
-  <button mat-raised-button color="primary" *ngIf="readOnly" (click)="enterEditMode()">Edit</button>
+  <button mat-raised-button color="primary" *ngIf="canEdit()" (click)="enterEditMode()">Edit</button>
   <button mat-raised-button color="primary" *ngIf="!readOnly" (click)="updateIdentificationInfo()">Save</button>
   <button mat-raised-button color="primary" *ngIf="!readOnly" (click)="cancelModifications()">Cancel</button>
   <app-image-details [imageSummary]="imageSummary"
