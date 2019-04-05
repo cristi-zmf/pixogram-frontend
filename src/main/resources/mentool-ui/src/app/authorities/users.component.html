@@ -29,8 +29,8 @@
     <ng-container matColumnDef="subscribed">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let element" >
-        <button *ngIf="!element.subscribed" mat-raised-button color="primary" (click)="follow(element)">Subscribe</button>
-        <button *ngIf="element.subscribed" mat-raised-button color="warn" (click)="unfollow(element)">Unsubscribe</button>
+        <button *ngIf="!element.subscribed" mat-raised-button color="primary" (click)="follow(element)">Follow</button>
+        <button *ngIf="element.subscribed" mat-raised-button color="warn" (click)="unfollow(element)">Unfollow</button>
         <button mat-raised-button color="primary" (click)="viewUserGallery(element)">View Gallery</button>
       </td>
     </ng-container>

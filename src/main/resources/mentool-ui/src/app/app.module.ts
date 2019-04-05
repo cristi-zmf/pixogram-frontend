@@ -27,8 +27,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {UsersComponent} from './authorities/users.component';
 import {JwtInterceptorService} from "./jwt-interceptor.service";
-import {TrainingSearchComponent} from './training/training-search.component';
-import {SkillPickerComponent} from './skill/skill-picker.component';
 import {ToastrHttpInterceptorService} from "./toastr-http-interceptor.service";
 import {ToastrModule} from "ngx-toastr";
 import {DatepickerComponent} from './datepicker/datepicker.component';
@@ -36,12 +34,8 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {UserComponent} from './user/user.component';
 import {RequiredComponent} from './shared/required.component';
 import {NgxPermissionsModule} from "ngx-permissions";
-import {AdminComponent} from './admin/admin.component';
 import {DialogComponent} from './shared/dialog/dialog.component';
-import {TrainingDetailsComponent} from './training/training-details/training-details.component';
-import {TrainingsListComponent} from "./shared/trainings/trainings-list.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {MentorTrainingsComponent} from './user/mentor-trainings/mentor-trainings.component';
 import {MatDatetimepickerModule} from "@mat-datetimepicker/core";
 import {MatMomentDatetimeModule} from "@mat-datetimepicker/moment";
 import {MomentDateModule} from "@angular/material-moment-adapter";
@@ -56,18 +50,11 @@ import {UserImageDetailsComponent} from './user-gallery-image/user-image-details
     AppComponent,
     LoginComponent,
     UsersComponent,
-    TrainingSearchComponent,
-    SkillPickerComponent,
     DatepickerComponent,
     UserComponent,
-    TrainingDetailsComponent,
     RequiredComponent,
-    AdminComponent,
     DialogComponent,
     MyDialogComponent,
-    TrainingDetailsComponent,
-    TrainingsListComponent,
-    MentorTrainingsComponent,
     UserGalleryImageComponent,
     UserImageUploadComponent,
     ImageDetailsComponent,
