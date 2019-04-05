@@ -51,7 +51,7 @@ export class UsersComponent implements OnInit {
       (usersFromBack: [any]) => {
         const userConsults = usersFromBack.map(e => {return UserConsult.fromJson(e)});
         this.dataSource = new MatTableDataSource(userConsults);
-        this.dataSource.paginator = this.actualPaginator;
+        setTimeout(() => this.dataSource.paginator = this.actualPaginator);
         this.dataSource.sort = this.actualSort;
         this.dataIsAvailable = true;
         this.selectedRow = null;
