@@ -1,7 +1,8 @@
 package com.cristi.mentool.mentoolfront.domain.user;
 
 import com.cristi.mentool.mentoolfront.domain.EmailAddress;
-import com.cristi.mentool.mentoolfront.exposition.UserCreateCommand;
+import com.cristi.mentool.mentoolfront.domain.Role;
+import com.cristi.mentool.mentoolfront.exposition.user.UserCreateCommand;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class AddNewUser {
         }
         String passwordHash = bcryptEncoder.encode(command.password);
         User newUser = new User(
-                emailAddress, command.role, passwordHash,
+                emailAddress, Role.USER, passwordHash,
                 command.firstName, command.lastName
         );
         return users.add(newUser);

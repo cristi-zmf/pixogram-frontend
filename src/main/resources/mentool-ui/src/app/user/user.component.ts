@@ -6,6 +6,7 @@ import {HttpResponse} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {LoginService} from "../login/login.service";
 import {UserForm} from "./user-form";
+import {CurrentUserService} from "../login/current-user.service";
 
 const urlPattern = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
@@ -17,21 +18,24 @@ const urlPattern = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 export class UserComponent implements OnInit {
   private userForm = new UserForm();
   private mode: string;
+  private isLoggedIn: boolean;
   private userAddressFromUrl: string;
   private userAddressBeforeEdit: string;
   constructor(
     private toastrService: ToastrService, private userService: UserService,
-    private route: ActivatedRoute, private loginService: LoginService,
+    private route: ActivatedRoute, private loginService: LoginService, private currentUserService: CurrentUserService,
     private router: Router
   ) {}
 
   ngOnInit() {
+    this.isLoggedIn = this.currentUserService.isAuthenticated();
     this.route.params.subscribe(
       routeParams => {
         this.userForm = new UserForm();
         this.mode = routeParams['mode'];
         this.userAddressFromUrl = routeParams['id'];
         this.handleFormDataAccordingToComponentMode();
+        console.log(this.mode);
       }
     );
   }

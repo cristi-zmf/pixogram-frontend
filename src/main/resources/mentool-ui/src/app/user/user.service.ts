@@ -12,7 +12,7 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
   registerUser(userCreateCommand: any): Observable<any> {
-    return this.httpClient.put(`${SECURITY_API}`, userCreateCommand);
+    return this.httpClient.post(`${SECURITY_API}`, userCreateCommand);
   }
 
   updateMentor(userUpdateCommand: any): Observable<any> {

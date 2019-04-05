@@ -7,18 +7,20 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Set;
 
 @Repository(value = "userService")
 @Primary
 public class SdjUsers implements Users {
-    private final UserSdj sdj;
+    private final UsersSdj sdj;
 
 
-    public SdjUsers(UserSdj sdj) {
+    public SdjUsers(UsersSdj sdj) {
         this.sdj = sdj;
     }
 

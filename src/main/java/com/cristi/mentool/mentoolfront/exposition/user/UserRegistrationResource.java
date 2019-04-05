@@ -1,18 +1,14 @@
 package com.cristi.mentool.mentoolfront.exposition.user;
 
-import com.cristi.mentool.mentoolfront.domain.Role;
 import com.cristi.mentool.mentoolfront.domain.user.AddNewUser;
 import com.cristi.mentool.mentoolfront.exposition.PixogramBaseRequestMapping;
+import com.cristi.mentool.mentoolfront.exposition.SingleValueDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
-
-import javax.validation.Valid;
 
 @PixogramBaseRequestMapping
 public class UserRegistrationResource {
@@ -31,12 +27,7 @@ public class UserRegistrationResource {
     }
 
     @PostMapping(value = "/users")
-    public String registerUser(@Valid @RequestBody UserCreateCommand registerCommand) throws AuthenticationException {
-        registerCommand.role = Role.USER;
-        addNewUser.addUserFor(registerCommand);
-        return restTemplate.exchange(
-                PERSONS_SERVICE + "/persons/users", HttpMethod.POST,
-                new HttpEntity<>(registerCommand), String.class
-        ).getBody();
+    public SingleValueDto<String> registerUser(@RequestBody UserCreateCommand registerCommand) throws AuthenticationException {
+        return new SingleValueDto<>(addNewUser.addUserFor(registerCommand).getId().getValue());
     }
 }

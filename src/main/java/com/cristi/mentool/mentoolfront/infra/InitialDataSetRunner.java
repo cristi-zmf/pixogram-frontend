@@ -1,7 +1,7 @@
 package com.cristi.mentool.mentoolfront.infra;
 
 import com.cristi.mentool.mentoolfront.domain.user.AddNewUser;
-import com.cristi.mentool.mentoolfront.exposition.UserCreateCommand;
+import com.cristi.mentool.mentoolfront.exposition.user.UserCreateCommand;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -15,6 +15,7 @@ import static com.cristi.mentool.mentoolfront.domain.Role.USER;
 @Transactional
 public class InitialDataSetRunner implements ApplicationRunner {
     private final AddNewUser addNewUser;
+
     public InitialDataSetRunner(AddNewUser addNewUser) {
         this.addNewUser = addNewUser;
     }
@@ -22,22 +23,22 @@ public class InitialDataSetRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         UserCreateCommand cristi = new UserCreateCommand(
-                "cristi@cristi.com", "Cristi", "Cucumber", USER, "cristi"
+                "cristi@cristi.com", "Cristi", "Cucumber", "cristi"
         );
         UserCreateCommand linus = new UserCreateCommand(
-                "linus@linus.com", "Linus", "Torvalds", USER, "linus"
+                "linus@linus.com", "Linus", "Torvalds", "linus"
         );
         UserCreateCommand edward = new UserCreateCommand(
-                "edward@edward.com", "Edward", "The chief", USER, "edward"
+                "edward@edward.com", "Edward", "The chief", "edward"
         );
         UserCreateCommand john = new UserCreateCommand(
-                "john@john.com", "John", "Baiat bun", USER, "john"
+                "john@john.com", "John", "Baiat bun", "john"
         );
         UserCreateCommand hercules = new UserCreateCommand(
-                "hercules@hercules.com", "Hercules", "The Will bender", USER, "hercules"
+                "hercules@hercules.com", "Hercules", "The Will bender", "hercules"
         );
         UserCreateCommand admin = new UserCreateCommand(
-                "admin@admin.com", "Admin", "The Admin", USER, "admin"
+                "admin@admin.com", "Admin", "The Admin", "admin"
         );
         Stream.of(cristi, linus, edward, john, hercules, admin).forEach(addNewUser::addUserFor);
     }

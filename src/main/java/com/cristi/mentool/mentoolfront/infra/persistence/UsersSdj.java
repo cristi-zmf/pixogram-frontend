@@ -4,5 +4,5 @@ import com.cristi.mentool.mentoolfront.domain.EmailAddress;
 import com.cristi.mentool.mentoolfront.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserSdj extends JpaRepository<User, EmailAddress> {
+public interface UsersSdj extends JpaRepository<User, EmailAddress> {
 }

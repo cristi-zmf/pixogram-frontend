@@ -2,6 +2,7 @@ package com.cristi.mentool.mentoolfront.infra.comment;
 
 import com.cristi.mentool.mentoolfront.exposition.comment.CommentDetailsDto;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
