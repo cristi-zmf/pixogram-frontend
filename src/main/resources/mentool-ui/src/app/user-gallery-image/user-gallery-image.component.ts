@@ -62,12 +62,9 @@ export class UserGalleryImageComponent implements OnInit {
 
 
   applyFilter(filterValue: string) {
-    console.log(filterValue);
     filterValue = filterValue.trim().toLowerCase()
-    this.processedImages = this.allProcessedImages.filter(i => i.title.includes(filterValue));
+    this.processedImages = this.allProcessedImages.filter(i => i.title.trim().toLowerCase().includes(filterValue));
   }
-
-
 
   display(pic:ImageIdentificationInfo):any
   {
@@ -83,5 +80,13 @@ export class UserGalleryImageComponent implements OnInit {
 
   thereAreNoPictures(): boolean {
     return !this.processedImages || this.processedImages.length === 0;
+  }
+
+  truncateToFit(title: string) {
+    if (title.length > 10) {
+      return title.slice(0, 10) + "...";
+    } else {
+      return title;
+    }
   }
 }
