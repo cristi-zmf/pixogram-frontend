@@ -8,11 +8,14 @@
     <button mat-icon-button aria-label="Example icon-button with a heart icon" color="primary" (click)="like()">
       <mat-icon>thumb_up</mat-icon>{{imageSummary.getNumberOfLikes()}}
     </button>
+    <button mat-icon-button aria-label="Example icon-button with a heart icon" (click)="showLikesDetails()">
+      <mat-icon>more_horiz</mat-icon>
+    </button>
     <button mat-icon-button aria-label="Example icon-button with a heart icon" color="warn" (click)="dislike()">
-      <mat-icon>thumb_down</mat-icon>
+      <mat-icon style="width: 30px">thumb_down</mat-icon>{{imageSummary.getNumberOfDislikes()}}
     </button>
     <button mat-icon-button aria-label="Example icon-button with a heart icon" (click)="showDislikesDetails()">
-      {{imageSummary.getNumberOfDislikes()}}
+      <mat-icon>more_horiz</mat-icon>
     </button>
   </div>
   <div class="row">

@@ -1,5 +1,6 @@
 package com.cristi.mentool.mentoolfront.domain.comment;
 
+import com.cristi.mentool.mentoolfront.domain.BaseEntity;
 import com.cristi.mentool.mentoolfront.domain.EmailAddress;
 import com.cristi.mentool.mentoolfront.domain.UniqueId;
 import com.cristi.mentool.mentoolfront.domain.user.User;
@@ -12,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -29,12 +31,10 @@ public class ListCommentsForImage {
     public List<CommentDetailsDto> resolveCommentsAuthorsName(UniqueId imageId) {
         List<CommentDetailsDto> comments = commentFeignClient.listComments(imageId.getValue());
         Set<EmailAddress> namesToResolve = new HashSet<>();
-        comments.forEach(c -> namesToResolve.addAll(c.likesAsEmailAddresses()));
-        comments.forEach(c -> namesToResolve.addAll(c.dislikesAsEmailAddresses()));
         comments.forEach(c -> namesToResolve.add(c.authorAsEmailAddress()));
-        Map<String, String> addressesToFullNames = users.findAll().stream().filter(u -> namesToResolve.contains(u.getId()))
-                .collect(Collectors.toMap(u -> u.getId().getValue(), User::getFullName));
-        return comments.stream().map(c -> c.resolveNames(addressesToFullNames)).collect(toList());
+        Map<EmailAddress, User> addressesToFullNames = users.findAll().stream().filter(u -> namesToResolve.contains(u.getId()))
+                .collect(Collectors.toMap(User::getId, Function.identity()));
+        return comments.stream().map(c -> c.resolveNames(addressesToFullNames.get(c.authorAsEmailAddress()))).collect(toList());
     }
 
 

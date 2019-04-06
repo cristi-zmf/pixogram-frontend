@@ -60,4 +60,8 @@ export class ImageDetailsComponent implements OnInit {
   showDislikesDetails() {
     this.showLikesDislikesDetailsService.showLikesOrDislikesDetails(this.imageSummary.dislikes);
   }
+
+  showLikesDetails() {
+    this.showLikesDislikesDetailsService.showLikesOrDislikesDetails(this.imageSummary.likes);
+  }
 }

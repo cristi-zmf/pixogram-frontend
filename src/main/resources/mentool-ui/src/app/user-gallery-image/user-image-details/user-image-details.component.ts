@@ -9,6 +9,7 @@ import {CommentService} from "../../comment/comment.service";
 import {AddCommentCommand} from "../../comment/add-comment-command";
 import {CurrentUserService} from "../../login/current-user.service";
 import {AuthentifiedUser} from "../../login/authentified-user";
+import {ShowLikesDislikesDetailsService} from "../show-likes-dislikes-details.service";
 
 @Component({
   selector: 'app-user-image-details',
@@ -30,7 +31,8 @@ export class UserImageDetailsComponent implements OnInit, OnDestroy {
 
   constructor(
     private activatedRoute: ActivatedRoute, private imageService: ImageService, private router: Router,
-    private commentService: CommentService, private currentUserService: CurrentUserService
+    private commentService: CommentService, private currentUserService: CurrentUserService,
+    private showLikesDislikesDetailsService: ShowLikesDislikesDetailsService
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -170,6 +172,14 @@ export class UserImageDetailsComponent implements OnInit, OnDestroy {
     )).subscribe(() => {
       this.reloadLikesDislikes(comment);
     });
+  }
+
+  showCommentLikesDetails(comment: CommentDetails) {
+    this.showLikesDislikesDetailsService.showLikesOrDislikesDetails(comment.likes);
+  }
+
+  showCommentDislikesDetails(comment: CommentDetails) {
+    this.showLikesDislikesDetailsService.showLikesOrDislikesDetails(comment.dislikes);
   }
 
   private reloadLikesDislikes(comment: CommentDetails) {

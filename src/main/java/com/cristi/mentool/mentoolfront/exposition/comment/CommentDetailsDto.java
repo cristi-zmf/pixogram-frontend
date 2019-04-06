@@ -1,6 +1,7 @@
 package com.cristi.mentool.mentoolfront.exposition.comment;
 
 import com.cristi.mentool.mentoolfront.domain.EmailAddress;
+import com.cristi.mentool.mentoolfront.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,11 +36,9 @@ public class CommentDetailsDto {
         return new EmailAddress(author);
     }
 
-    public CommentDetailsDto resolveNames(Map<String, String> addressesToNames) {
-        Set<String> resolvedLikes = likes.stream().map(addressesToNames::get).collect(toSet());
-        Set<String> resolvedDislikes = dislikes.stream().map(addressesToNames::get).collect(toSet());
+    public CommentDetailsDto resolveNames(User authorDetails) {
         return new CommentDetailsDto(
-                id, author, addressesToNames.get(author), value, imageId, resolvedLikes, resolvedDislikes, lastModified
+                id, author, authorDetails.getFullName(), value, imageId, likes, dislikes, lastModified
         );
     }
 }

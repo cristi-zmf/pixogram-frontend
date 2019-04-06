@@ -35,8 +35,14 @@
         <button mat-icon-button aria-label="Example icon-button with a heart icon" color="primary" (click)="like(comment)">
           <mat-icon>thumb_up</mat-icon>{{comment.getNumberOfLikes()}}
         </button>
+        <button mat-icon-button aria-label="Example icon-button with a heart icon" (click)="showCommentLikesDetails(comment)">
+          <mat-icon>more_horiz</mat-icon>
+        </button>
         <button mat-icon-button aria-label="Example icon-button with a heart icon" color="warn" (click)="dislike(comment)">
           <mat-icon>thumb_down</mat-icon>{{comment.getNumberOfDislikes()}}
+        </button>
+        <button mat-icon-button aria-label="Example icon-button with a heart icon" (click)="showCommentDislikesDetails(comment)">
+          <mat-icon>more_horiz</mat-icon>
         </button>
       </div>
       <div *ngIf="commentAuthorIsLoggedUser(comment) && comment.isNotInEditMode()">
