@@ -44,6 +44,7 @@ import {MyDialogComponent} from "./shared/my-dialog/my-dialog.component";
 import {UserImageUploadComponent} from './user/user-image-upload/user-image-upload.component';
 import {ImageDetailsComponent} from './user-gallery-image/image-details/image-details.component';
 import {UserImageDetailsComponent} from './user-gallery-image/user-image-details/user-image-details.component';
+import { FollowingComponent } from './following/following.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {UserImageDetailsComponent} from './user-gallery-image/user-image-details
     UserGalleryImageComponent,
     UserImageUploadComponent,
     ImageDetailsComponent,
-    UserImageDetailsComponent
+    UserImageDetailsComponent,
+    FollowingComponent
   ],
   imports: [
     BrowserModule,

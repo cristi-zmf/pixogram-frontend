@@ -48,4 +48,9 @@ public class SdjUsers implements Users {
     public User findById(EmailAddress address) {
         return sdj.findById(address).orElseThrow(NoSuchElementException::new);
     }
+
+    @Override
+    public Set<User> findAll(Set<EmailAddress> addresses) {
+        return new HashSet<>(sdj.findAllById(addresses));
+    }
 }

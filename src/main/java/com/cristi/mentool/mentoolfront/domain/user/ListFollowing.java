@@ -6,26 +6,25 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Set;
 
-import static com.cristi.mentool.mentoolfront.exposition.user.UserConsultDto.toUserConsultDtoFollowedBy;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
 @Service
-public class ListUsers {
+public class ListFollowing {
     private final Users users;
     private final IdentitySupplier identitySupplier;
 
-    public ListUsers(Users users, IdentitySupplier identitySupplier) {
+    public ListFollowing(Users users, IdentitySupplier identitySupplier) {
         this.users = users;
         this.identitySupplier = identitySupplier;
     }
 
-    public List<UserConsultDto> listUsers() {
+    public List<UserConsultDto> listFollowing() {
         User currentUser = identitySupplier.get();
-        Set<User> allUsers = users.findAll();
-        return allUsers.stream()
+        Set<User> following = users.findAll(currentUser.getFollowing());
+        return following.stream()
                 .sorted(comparing(User::getFullName))
-                .map(u -> toUserConsultDtoFollowedBy(u, currentUser))
+                .map(u -> UserConsultDto.toUserConsultDtoFollowedBy(u, currentUser))
                 .collect(toList());
     }
 }

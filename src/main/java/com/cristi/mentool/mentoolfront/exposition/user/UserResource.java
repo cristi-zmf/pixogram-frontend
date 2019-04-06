@@ -9,7 +9,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
-import java.util.Set;
+import java.util.List;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -17,19 +17,26 @@ import static org.springframework.http.ResponseEntity.ok;
 public class UserResource {
     private final Users users;
     private final ListUsers listUsers;
+    private final ListFollowing listFollowing;
     private final FollowUnfollowUser followUnfollowUser;
     private final ConsultUser consultUser;
 
-    public UserResource(Users users, ListUsers listUsers, FollowUnfollowUser followUnfollowUser, ConsultUser consultUser) {
+    public UserResource(Users users, ListUsers listUsers, ListFollowing listFollowing, FollowUnfollowUser followUnfollowUser, ConsultUser consultUser) {
         this.users = users;
         this.listUsers = listUsers;
+        this.listFollowing = listFollowing;
         this.followUnfollowUser = followUnfollowUser;
         this.consultUser = consultUser;
     }
 
     @GetMapping(value = "/users")
-    public Set<UserConsultDto> getUsers() throws AuthenticationException {
+    public List<UserConsultDto> getUsers() throws AuthenticationException {
         return listUsers.listUsers();
+    }
+
+    @GetMapping(value = "/users/following")
+    public List<UserConsultDto> listFollowing() throws AuthenticationException {
+        return listFollowing.listFollowing();
     }
 
     @PutMapping(value = "/users/follow-user")

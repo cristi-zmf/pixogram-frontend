@@ -166,7 +166,8 @@ export class UserImageDetailsComponent implements OnInit, OnDestroy {
   }
 
   dislike(comment: CommentDetails) {
-    this.commentService.dislikeComment(comment.generateLikeDislikeCommand(this.currentUser.username)).subscribe(() => {
+    this.commentService.dislikeComment(comment.generateLikeDislikeCommand(this.currentUser.username
+    )).subscribe(() => {
       this.reloadLikesDislikes(comment);
     });
   }

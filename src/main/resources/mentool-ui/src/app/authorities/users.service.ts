@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {UserConsult} from "./user";
 import {AppSettings} from "../app-settings";
 import {Observable} from "rxjs";
 import {FollowUnfollowCommand} from "./follow-unfollow-command";
@@ -14,6 +13,10 @@ export class UsersService {
 
   public getUsers(): Observable<any> {
     return this.http.get(`${AppSettings.API_PREFIX}/users`)
+  }
+
+  public listFollowing(): Observable<any> {
+    return this.http.get(`${AppSettings.API_PREFIX}/users/following`)
   }
 
   public getUser(email: string): Observable<any> {

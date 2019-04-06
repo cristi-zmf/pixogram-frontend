@@ -2,8 +2,6 @@ package com.cristi.mentool.mentoolfront.domain.user;
 
 import com.cristi.mentool.mentoolfront.domain.EmailAddress;
 import com.cristi.mentool.mentoolfront.exposition.user.UserConsultDto;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import static com.cristi.mentool.mentoolfront.exposition.user.UserConsultDto.toUserConsultDtoFollowedBy;
@@ -11,16 +9,16 @@ import static com.cristi.mentool.mentoolfront.exposition.user.UserConsultDto.toU
 @Service
 public class ConsultUser {
     private final Users users;
+    private final IdentitySupplier identitySupplier;
 
-    public ConsultUser(Users users) {
+    public ConsultUser(Users users, IdentitySupplier identitySupplier) {
         this.users = users;
+        this.identitySupplier = identitySupplier;
     }
 
     public UserConsultDto consultUser(EmailAddress emailAddress) {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        EmailAddress loggedEmailAddress = new EmailAddress(userDetails.getUsername());
+        User loggedUser = identitySupplier.get();
         User userToConsult = users.findById(emailAddress);
-        User loggedUser = users.findById(loggedEmailAddress);
         return toUserConsultDtoFollowedBy(userToConsult, loggedUser);
     }
 }

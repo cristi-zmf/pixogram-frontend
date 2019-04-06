@@ -10,4 +10,5 @@ public interface Users extends UserDetailsService {
     Set<User> findAll();
     boolean exists(EmailAddress address);
     User findById(EmailAddress address);
+    Set<User> findAll(Set<EmailAddress> addresses);
 }

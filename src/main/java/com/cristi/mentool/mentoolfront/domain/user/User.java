@@ -112,6 +112,10 @@ public class User extends BaseEntity<User, EmailAddress> implements UserDetails 
         return enabled;
     }
 
+    public Set<EmailAddress> getFollowing() {
+        return new HashSet<>(following);
+    }
+
     public Role getRole() {
         return role;
     }
