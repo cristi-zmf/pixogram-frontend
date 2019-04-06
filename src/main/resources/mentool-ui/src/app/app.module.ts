@@ -21,7 +21,7 @@ import {
   MatRippleModule,
   MatSelectModule,
   MatTableModule,
-  MatToolbarModule
+  MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -89,6 +89,7 @@ import { LikesDislikesDetailsDialogComponent } from './user-gallery-image/likes-
     MatInputModule,
     MatIconModule,
     MatProgressBarModule,
+    MatTooltipModule,
     MatListModule,
     ReactiveFormsModule,
     FlexLayoutModule,

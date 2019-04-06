@@ -25,6 +25,7 @@ export class UserGalleryImageComponent implements OnInit {
   userAddress: string;
   userImageIds: Array<{id: string, title: string}>;
   processedImages: ImageIdentificationInfo[] = [];
+  allProcessedImages: ImageIdentificationInfo[] = [];
   baseUrl: string = window.location.origin;
 
   constructor(
@@ -54,11 +55,17 @@ export class UserGalleryImageComponent implements OnInit {
         fullImg: `${this.baseUrl}/${AppSettings.IMAGES_API_PREFIX}/full-images/${imageIdTitle.id}`
       };
       this.processedImages.push(processedImage);
+      this.allProcessedImages.push(processedImage);
     }
 
   }
 
 
+  applyFilter(filterValue: string) {
+    console.log(filterValue);
+    filterValue = filterValue.trim().toLowerCase()
+    this.processedImages = this.allProcessedImages.filter(i => i.title.includes(filterValue));
+  }
 
 
 

@@ -1,5 +1,5 @@
 <mat-form-field class="search-form">
-  <input matInput placeholder="Search Picture" type="text">
+  <input matInput placeholder="Search Picture" (keyup)="applyFilter($event.target.value)" type="text">
 </mat-form-field>
 <button button="submit" mat-raised-button color="primary">Search</button>
 <br>

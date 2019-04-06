@@ -1,18 +1,28 @@
-<div *ngIf="imageSummary">
-  <mat-toolbar>{{imageSummary.getTitle()}}</mat-toolbar>
+<div *ngIf="imageSummary" style="display: block; margin-left: auto; margin-right: auto; width: 60%;">
+  <mat-toolbar>
+    <span class="title-center">{{imageSummary.getTitle()}}</span>
+  </mat-toolbar>
+
   <div class="row">
     <mat-form-field class="col-md-12" *ngIf="!readOnly">
       <input matInput placeholder="New Title" [(ngModel)]="newTitle" [value]="newTitle"/>
     </mat-form-field>
   </div>
-
-  <button mat-raised-button color="primary" *ngIf="canEdit()" (click)="enterEditMode()">Edit</button>
+  <button mat-raised-button matTooltip="Edit title and description" matTooltipPosition="right" color="primary"
+          style="display: block; margin-left: auto; margin-right: auto;"
+          *ngIf="canEdit()" (click)="enterEditMode()">
+    Edit
+  </button>
   <button mat-raised-button color="primary" *ngIf="!readOnly" (click)="updateIdentificationInfo()">Save</button>
   <button mat-raised-button color="primary" *ngIf="!readOnly" (click)="cancelModifications()">Cancel</button>
-  <app-image-details [imageSummary]="imageSummary"
-                     [readOnly]="readOnly"
-                     (descriptionChange)="updateDescription($event)">
-  </app-image-details>
+  <div>
+    <app-image-details [imageSummary]="imageSummary"
+                       [readOnly]="readOnly"
+                       (descriptionChange)="updateDescription($event)">
+    </app-image-details>
+    <button mat-raised-button color="primary" *ngIf="!readOnly" (click)="updateIdentificationInfo()">Save</button>
+    <button mat-raised-button color="primary" *ngIf="!readOnly" (click)="cancelModifications()">Cancel</button>
+  </div>
 
 
   <mat-toolbar>Comments</mat-toolbar>
@@ -29,19 +39,26 @@
     <mat-card *ngFor="let comment of comments">
       <mat-card-title>{{comment.fullName}}</mat-card-title>
       <mat-form-field appearance="outline" class="col-md-12">
-        <textarea matInput placeholder="Description" [value]="comment.value" [readonly]="comment.isNotInEditMode()" [(ngModel)]="comment.value"></textarea>
+        <textarea matInput placeholder="Description" [value]="comment.value" [readonly]="comment.isNotInEditMode()"
+                  [(ngModel)]="comment.value"></textarea>
       </mat-form-field>
       <div id="likes">
-        <button mat-icon-button aria-label="Example icon-button with a heart icon" color="primary" (click)="like(comment)">
-          <mat-icon>thumb_up</mat-icon>{{comment.getNumberOfLikes()}}
+        <button mat-icon-button aria-label="Example icon-button with a heart icon" color="primary"
+                (click)="like(comment)">
+          <mat-icon>thumb_up</mat-icon>
+          {{comment.getNumberOfLikes()}}
         </button>
-        <button mat-icon-button aria-label="Example icon-button with a heart icon" (click)="showCommentLikesDetails(comment)">
+        <button mat-icon-button aria-label="Example icon-button with a heart icon"
+                (click)="showCommentLikesDetails(comment)">
           <mat-icon>more_horiz</mat-icon>
         </button>
-        <button mat-icon-button aria-label="Example icon-button with a heart icon" color="warn" (click)="dislike(comment)">
-          <mat-icon>thumb_down</mat-icon>{{comment.getNumberOfDislikes()}}
+        <button mat-icon-button aria-label="Example icon-button with a heart icon" color="warn"
+                (click)="dislike(comment)">
+          <mat-icon>thumb_down</mat-icon>
+          {{comment.getNumberOfDislikes()}}
         </button>
-        <button mat-icon-button aria-label="Example icon-button with a heart icon" (click)="showCommentDislikesDetails(comment)">
+        <button mat-icon-button aria-label="Example icon-button with a heart icon"
+                (click)="showCommentDislikesDetails(comment)">
           <mat-icon>more_horiz</mat-icon>
         </button>
       </div>
