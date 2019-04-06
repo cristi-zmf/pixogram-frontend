@@ -1,15 +1,13 @@
 package com.cristi.mentool.mentoolfront.infra;
 
 import com.cristi.mentool.mentoolfront.domain.user.AddNewUser;
-import com.cristi.mentool.mentoolfront.exposition.user.UserCreateCommand;
+import com.cristi.mentool.mentoolfront.exposition.user.UserCreateCommandDto;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Stream;
-
-import static com.cristi.mentool.mentoolfront.domain.Role.USER;
 
 @Component
 @Transactional
@@ -22,22 +20,22 @@ public class InitialDataSetRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        UserCreateCommand cristi = new UserCreateCommand(
+        UserCreateCommandDto cristi = new UserCreateCommandDto(
                 "cristi@cristi.com", "Cristi", "Cucumber", "cristi"
         );
-        UserCreateCommand linus = new UserCreateCommand(
+        UserCreateCommandDto linus = new UserCreateCommandDto(
                 "linus@linus.com", "Linus", "Torvalds", "linus"
         );
-        UserCreateCommand edward = new UserCreateCommand(
+        UserCreateCommandDto edward = new UserCreateCommandDto(
                 "edward@edward.com", "Edward", "The chief", "edward"
         );
-        UserCreateCommand john = new UserCreateCommand(
+        UserCreateCommandDto john = new UserCreateCommandDto(
                 "john@john.com", "John", "Baiat bun", "john"
         );
-        UserCreateCommand hercules = new UserCreateCommand(
+        UserCreateCommandDto hercules = new UserCreateCommandDto(
                 "hercules@hercules.com", "Hercules", "The Will bender", "hercules"
         );
-        UserCreateCommand admin = new UserCreateCommand(
+        UserCreateCommandDto admin = new UserCreateCommandDto(
                 "admin@admin.com", "Admin", "The Admin", "admin"
         );
         Stream.of(cristi, linus, edward, john, hercules, admin).forEach(addNewUser::addUserFor);

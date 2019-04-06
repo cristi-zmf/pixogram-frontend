@@ -72,36 +72,6 @@ export class UsersComponent implements OnInit {
     this.selectedRow = row;
   }
 
-  alreadyLocked(): boolean {
-    console.log(!this.selectedRow);
-    if (this.selectedRow) {
-      return !this.selectedRow.isNotLocked;
-    }
-    else {
-      return true;
-    }
-  }
-
-  alreadyUnlocked() {
-    if (this.selectedRow) {
-      return this.selectedRow.isNotLocked;
-    } else {
-      return true;
-    }
-  }
-
-  lockSelectedUser() {
-    this.userService.lockAuthority(this.selectedRow.email).subscribe(
-      () => this.refreshData()
-    )
-  }
-
-  unlockSelectedUser() {
-    this.userService.unlockAuthority(this.selectedRow.email).subscribe(
-      () => this.refreshData()
-    )
-  }
-
   follow(element: UserConsult) {
     this.userService.followUser(element.generateFollowUnfollowCommand(this.currentUserAddress)).subscribe(() =>{
       this.refreshUserElement(element);

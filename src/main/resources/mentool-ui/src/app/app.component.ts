@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {CurrentUserService} from "./login/current-user.service";
 import {LoginService} from "./login/login.service";
 import {NgxPermissionsService} from "ngx-permissions";
-import {Role} from "./authorities/role.enum";
+import {Role} from "./users/role.enum";
 import {AuthentifiedUser} from "./login/authentified-user";
 
 @Component({

@@ -20,7 +20,7 @@ public abstract class BaseEntity<T extends BaseEntity<T, ID>, ID extends BaseVal
 
     @NotNull
     @Id
-    private final ID id;
+    protected ID id;
 
     protected BaseEntity(Class<T> type, ID id) {
         this.type = type;

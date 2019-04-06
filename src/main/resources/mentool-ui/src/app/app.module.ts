@@ -25,7 +25,7 @@ import {
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {UsersComponent} from './authorities/users.component';
+import {UsersComponent} from './users/users.component';
 import {JwtInterceptorService} from "./jwt-interceptor.service";
 import {ToastrHttpInterceptorService} from "./toastr-http-interceptor.service";
 import {ToastrModule} from "ngx-toastr";

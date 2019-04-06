@@ -47,6 +47,7 @@ export class UserComponent implements OnInit {
         userData => {
           this.setFormWithUserData(userData);
           this.userForm.removePasswordControlForViewAndEdit();
+          this.userForm.disableUsername();
         }
       );
       console.log(this.userForm);
@@ -74,9 +75,8 @@ export class UserComponent implements OnInit {
   }
 
   saveModifications() {
-    console.log("facem update");
-    this.userService.updateMentor(this.userForm.value).subscribe(
-      id => this.router.navigate([`mentor/view/${id}`])
+    this.userService.editUser(this.userForm.generateEditCommand()).subscribe(
+      id => this.router.navigate([`user/view/${id.value}`])
     );
   }
 

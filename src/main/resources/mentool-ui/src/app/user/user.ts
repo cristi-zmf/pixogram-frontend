@@ -1,4 +1,4 @@
-import {Role} from "../authorities/role.enum";
+import {Role} from "../users/role.enum";
 
 export class User {
   private role: Role = Role.USER;

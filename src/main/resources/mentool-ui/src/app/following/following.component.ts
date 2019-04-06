@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
-import {UserConsult} from "../authorities/user";
+import {UserConsult} from "../users/user";
 import {AuthentifiedUser} from "../login/authentified-user";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {UsersService} from "../authorities/users.service";
+import {UsersService} from "../users/users.service";
 import {CurrentUserService} from "../login/current-user.service";
 
 @Component({

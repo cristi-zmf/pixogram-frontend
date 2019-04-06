@@ -2,7 +2,7 @@ package com.cristi.mentool.mentoolfront.domain.user;
 
 import com.cristi.mentool.mentoolfront.domain.EmailAddress;
 import com.cristi.mentool.mentoolfront.domain.Role;
-import com.cristi.mentool.mentoolfront.exposition.user.UserCreateCommand;
+import com.cristi.mentool.mentoolfront.exposition.user.UserCreateCommandDto;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class AddNewUser {
         this.bcryptEncoder = bcryptEncoder;
     }
 
-    public User addUserFor(UserCreateCommand command) {
+    public User addUserFor(UserCreateCommandDto command) {
         EmailAddress emailAddress = new EmailAddress(command.username);
         if (users.exists(emailAddress)) {
             throw new IllegalStateException(format("%s is already registered", emailAddress));

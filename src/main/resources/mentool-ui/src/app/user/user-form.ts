@@ -1,5 +1,6 @@
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {User} from "./user";
+import {UserEditCommand} from "./user-edit-command";
 const urlPattern = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
 export class UserForm extends FormGroup{
@@ -25,7 +26,7 @@ export class UserForm extends FormGroup{
   }
 
   public getUsername(): string {
-    return this.get("username").value;
+    return this.getUsernameFormControl().value;
   }
 
   public getPassword(): string {
@@ -40,9 +41,19 @@ export class UserForm extends FormGroup{
     return this.get("lastName").value;
   }
 
+  public generateEditCommand(): UserEditCommand {
+    return new UserEditCommand(this.getFirstName(), this.getLastName());
+  }
 
+  public disableUsername(): void {
+    this.getUsernameFormControl().disable();
+  }
 
   removePasswordControlForViewAndEdit() {
     this.removeControl('password');
+  }
+
+  private getUsernameFormControl(): AbstractControl {
+    return this.get("username");
   }
 }

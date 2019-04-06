@@ -4,11 +4,11 @@ import {LoginComponent} from "./login/login.component";
 import {UserComponent} from "./user/user.component";
 import {CustomRouteReuseStrategy} from "./custom-reuse-strategy";
 import {NgxPermissionsGuard} from "ngx-permissions";
-import {Role} from "./authorities/role.enum";
+import {Role} from "./users/role.enum";
 import {UserGalleryImageComponent} from "./user-gallery-image/user-gallery-image.component";
 import {UserImageUploadComponent} from "./user/user-image-upload/user-image-upload.component";
 import {UserImageDetailsComponent} from "./user-gallery-image/user-image-details/user-image-details.component";
-import {UsersComponent} from "./authorities/users.component";
+import {UsersComponent} from "./users/users.component";
 import {FollowingComponent} from "./following/following.component";
 
 const routes: Routes = [

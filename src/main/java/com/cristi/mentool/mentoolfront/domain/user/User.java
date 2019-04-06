@@ -3,7 +3,7 @@ package com.cristi.mentool.mentoolfront.domain.user;
 import com.cristi.mentool.mentoolfront.domain.BaseEntity;
 import com.cristi.mentool.mentoolfront.domain.EmailAddress;
 import com.cristi.mentool.mentoolfront.domain.Role;
-import com.cristi.mentool.mentoolfront.exposition.user.UserConsultDto;
+import com.cristi.mentool.mentoolfront.exposition.user.UserEditCommandDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -150,5 +150,11 @@ public class User extends BaseEntity<User, EmailAddress> implements UserDetails 
 
     public boolean isFollowedBy(User follower) {
         return follower.following.contains(getId());
+    }
+
+    User modifyUser(UserEditCommandDto command) {
+        this.firstName = command.firstName;
+        this.lastName = command.lastName;
+        return this;
     }
 }

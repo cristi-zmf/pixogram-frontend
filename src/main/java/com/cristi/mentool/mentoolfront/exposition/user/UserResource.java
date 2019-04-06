@@ -19,13 +19,18 @@ public class UserResource {
     private final ListUsers listUsers;
     private final ListFollowing listFollowing;
     private final FollowUnfollowUser followUnfollowUser;
+    private final ListUsersByEmailAddresses listUsersByEmailAddresses;
     private final ConsultUser consultUser;
 
-    public UserResource(Users users, ListUsers listUsers, ListFollowing listFollowing, FollowUnfollowUser followUnfollowUser, ConsultUser consultUser) {
+    public UserResource(
+            Users users, ListUsers listUsers, ListFollowing listFollowing, FollowUnfollowUser followUnfollowUser,
+            ListUsersByEmailAddresses listUsersByEmailAddresses, ConsultUser consultUser
+    ) {
         this.users = users;
         this.listUsers = listUsers;
         this.listFollowing = listFollowing;
         this.followUnfollowUser = followUnfollowUser;
+        this.listUsersByEmailAddresses = listUsersByEmailAddresses;
         this.consultUser = consultUser;
     }
 
@@ -38,6 +43,12 @@ public class UserResource {
     public List<UserConsultDto> listFollowing() throws AuthenticationException {
         return listFollowing.listFollowing();
     }
+
+    @PostMapping(value = "/users/emails")
+    public List<UserConsultDto> listUsersByEmails(@RequestBody ListByEmailsCommandDto command) throws AuthenticationException {
+        return listUsersByEmailAddresses.listUsersByEmailAddresses(command);
+    }
+
 
     @PutMapping(value = "/users/follow-user")
     public SingleValueDto<String> followUser(@RequestBody FollowUnfollowCommandDto command) {
