@@ -1,6 +1,7 @@
 import {AppSettings} from "../app-settings";
 import {AuthentifiedUser} from "../login/authentified-user";
 import {LikeDislikeCommand} from "../comment/like-dislike-command";
+import {ImageIdentificationInfoUpdateCommand} from "./user-image-details/image-identification-info-update-command";
 
 const baseUrl = window.location.origin;
 export class ImageSummary {
@@ -84,5 +85,10 @@ export class ImageSummary {
   public updateLikesDislikeBaseOnSummary(other: ImageSummary) {
     this.likes = other.likes;
     this.dislikes = other.dislikes;
+  }
+
+  updateIdentificationInfoFromCommand(oldIdentificationInfo: ImageIdentificationInfoUpdateCommand) {
+    this.description = oldIdentificationInfo.description;
+    this.title = oldIdentificationInfo.title;
   }
 }

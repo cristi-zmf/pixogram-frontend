@@ -28,6 +28,7 @@ export class UserImageDetailsComponent implements OnInit, OnDestroy {
   private newDescription: string;
   private currentUser: AuthentifiedUser;
   private readonly mySubscription: Subscription;
+  private oldIdentificationInfo: ImageIdentificationInfoUpdateCommand;
 
   constructor(
     private activatedRoute: ActivatedRoute, private imageService: ImageService, private router: Router,
@@ -71,7 +72,7 @@ export class UserImageDetailsComponent implements OnInit, OnDestroy {
     this.imageSummary.comments.push(this.newComment);
     let addCommentCommand: AddCommentCommand = new AddCommentCommand(this.newComment, this.currentUser.username, this.imageSummary.id);
     this.commentService.addComment(addCommentCommand).subscribe(answer => {
-      this.reloadComponent();
+      this.loadComments();
       this.newComment = '';
     });
   }
@@ -82,7 +83,7 @@ export class UserImageDetailsComponent implements OnInit, OnDestroy {
 
   deleteComment(comment: CommentDetails) {
     this.commentService.deleteComment(comment.id).subscribe(() => {
-      this.reloadComponent();
+      this.loadComments();
     });
   }
 
@@ -90,6 +91,12 @@ export class UserImageDetailsComponent implements OnInit, OnDestroy {
     this.readOnly = false;
     this.newTitle = this.imageSummary.title;
     this.newDescription = this.imageSummary.description;
+    this.oldIdentificationInfo = {
+      title: this.newTitle,
+      description: this.newDescription,
+      imageId: this.imageSummary.id,
+      owner: this.imageSummary.owner
+    };
   }
 
   updateIdentificationInfo() {
@@ -116,7 +123,7 @@ export class UserImageDetailsComponent implements OnInit, OnDestroy {
 
   cancelModifications() {
     this.readOnly = true;
-    this.reloadComponent();
+    this.imageSummary.updateIdentificationInfoFromCommand(this.oldIdentificationInfo);
   }
 
   private reloadComponent() {
