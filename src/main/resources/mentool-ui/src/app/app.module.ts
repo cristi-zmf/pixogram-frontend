@@ -45,6 +45,7 @@ import {UserImageUploadComponent} from './user/user-image-upload/user-image-uplo
 import {ImageDetailsComponent} from './user-gallery-image/image-details/image-details.component';
 import {UserImageDetailsComponent} from './user-gallery-image/user-image-details/user-image-details.component';
 import { FollowingComponent } from './following/following.component';
+import { LikesDislikesDetailsDialogComponent } from './user-gallery-image/likes-dislikes-details-dialog/likes-dislikes-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -56,11 +57,13 @@ import { FollowingComponent } from './following/following.component';
     RequiredComponent,
     DialogComponent,
     MyDialogComponent,
+    LikesDislikesDetailsDialogComponent,
     UserGalleryImageComponent,
     UserImageUploadComponent,
     ImageDetailsComponent,
     UserImageDetailsComponent,
-    FollowingComponent
+    FollowingComponent,
+    LikesDislikesDetailsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +102,7 @@ import { FollowingComponent } from './following/following.component';
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ToastrHttpInterceptorService, multi: true}
   ],
-  entryComponents: [DialogComponent, MyDialogComponent],
+  entryComponents: [DialogComponent, MyDialogComponent, LikesDislikesDetailsDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

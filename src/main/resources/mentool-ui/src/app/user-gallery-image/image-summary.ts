@@ -55,6 +55,15 @@ export class ImageSummary {
     return this.likes.length;
   }
 
+  // public getDislikes(): Array<string> {
+  //   return new Array<string>(this.dislikes);
+  // }
+  //
+  // public getLikes(): Array<string> {
+  //   return new Array<string>(this.likes);
+  // }
+
+
   public getNumberOfDislikes(): number {
     return this.dislikes.length;
   }

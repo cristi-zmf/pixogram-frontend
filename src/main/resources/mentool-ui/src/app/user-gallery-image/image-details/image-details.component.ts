@@ -3,6 +3,7 @@ import {ImageSummary} from "../image-summary";
 import {CurrentUserService} from "../../login/current-user.service";
 import {ImageService} from "../image.service";
 import {AuthentifiedUser} from "../../login/authentified-user";
+import {ShowLikesDislikesDetailsService} from "../show-likes-dislikes-details.service";
 
 @Component({
   selector: 'app-image-details',
@@ -21,7 +22,12 @@ export class ImageDetailsComponent implements OnInit {
 
   @Output()
   descriptionChange: EventEmitter<string> = new EventEmitter();
-  constructor(public currentUserService: CurrentUserService, public imageService: ImageService) { }
+
+  constructor(
+    public currentUserService: CurrentUserService, public imageService: ImageService,
+    public showLikesDislikesDetailsService: ShowLikesDislikesDetailsService
+  ) {
+  }
 
   ngOnInit() {
     this.currentUser = this.currentUserService.getCurrentUser();
@@ -50,5 +56,8 @@ export class ImageDetailsComponent implements OnInit {
       let summaryFromBackend: ImageSummary = new ImageSummary(dataFromBackend);
       this.imageSummary.updateLikesDislikeBaseOnSummary(summaryFromBackend);
     })
+  }
+  showDislikesDetails() {
+    this.showLikesDislikesDetailsService.showLikesOrDislikesDetails(this.imageSummary.dislikes);
   }
 }
