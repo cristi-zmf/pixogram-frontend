@@ -23,7 +23,9 @@ zuul:
     token:
       serviceId: images
       path: /images/**
+      sensitiveHeaders: Cookie,Set-Cookie
       stripPrefix: false
+
 
 
 ribbon:
